@@ -6,20 +6,12 @@ using System.Threading.Tasks;
 
 namespace QuestForge.Core.Entities
 {
-    public enum ItemType
-    {
-        Equipment,
-        MagicItem,
-        MagicWeapon,
-        Weapon
-    }
-
-    public class Item
+    public class Npc
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public ItemType Type { get; set; }
-        public Character? OwnerCharacter { get; set; }
+        public Campaign Campaign { get; set; }
     }
 }
