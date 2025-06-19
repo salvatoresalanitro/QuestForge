@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\salva\\Documents\\.NET Projects\\QuestForge\\QuestForge.Core\\QuestForge.Core.csproj",
+      "projectUniqueName": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\QuestForge.Core\\QuestForge.Core.csproj",
       "projectName": "QuestForge.Core",
-      "projectPath": "C:\\Users\\salva\\Documents\\.NET Projects\\QuestForge\\QuestForge.Core\\QuestForge.Core.csproj",
+      "projectPath": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\QuestForge.Core\\QuestForge.Core.csproj",
       "packagesPath": "C:\\Users\\salva\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\salva\\Documents\\.NET Projects\\QuestForge\\QuestForge.Core\\obj\\",
+      "outputPath": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\QuestForge.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
