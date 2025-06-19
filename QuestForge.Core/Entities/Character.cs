@@ -16,5 +16,6 @@ namespace QuestForge.Core.Entities
         public int HitPoints { get; set; }
         public int ArmorClass { get; set; }
         public int Initiative { get; set; }
+        public List<Item> MyProperty { get; set; } = [];
     }
 }
