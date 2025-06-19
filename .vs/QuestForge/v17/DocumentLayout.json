@@ -1,10 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\salva\\Documents\\.NET Projects\\QuestForge\\",
+  "WorkspaceRootPath": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}|QuestForge.Core\\QuestForge.Core.csproj|c:\\users\\salva\\documents\\.net projects\\questforge\\questforge.core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}|QuestForge.Core\\QuestForge.Core.csproj|solutionrelative:questforge.core\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}|QuestForge.Core\\QuestForge.Core.csproj|c:\\users\\salva\\documents\\.netprojects\\questforge\\questforge.core\\entities\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}|QuestForge.Core\\QuestForge.Core.csproj|solutionrelative:questforge.core\\entities\\character.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}|QuestForge.Core\\QuestForge.Core.csproj|c:\\users\\salva\\documents\\.netprojects\\questforge\\questforge.core\\entities\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}|QuestForge.Core\\QuestForge.Core.csproj|solutionrelative:questforge.core\\entities\\campaign.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -22,15 +26,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Class1.cs",
-              "DocumentMoniker": "C:\\Users\\salva\\Documents\\.NET Projects\\QuestForge\\QuestForge.Core\\Class1.cs",
-              "RelativeDocumentMoniker": "QuestForge.Core\\Class1.cs",
-              "ToolTip": "C:\\Users\\salva\\Documents\\.NET Projects\\QuestForge\\QuestForge.Core\\Class1.cs",
-              "RelativeToolTip": "QuestForge.Core\\Class1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Campaign.cs",
+              "DocumentMoniker": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\QuestForge.Core\\Entities\\Campaign.cs",
+              "RelativeDocumentMoniker": "QuestForge.Core\\Entities\\Campaign.cs",
+              "ToolTip": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\QuestForge.Core\\Entities\\Campaign.cs",
+              "RelativeToolTip": "QuestForge.Core\\Entities\\Campaign.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T13:05:34.182Z",
+              "WhenOpened": "2025-06-19T14:34:15.223Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Character.cs",
+              "DocumentMoniker": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\QuestForge.Core\\Entities\\Character.cs",
+              "RelativeDocumentMoniker": "QuestForge.Core\\Entities\\Character.cs",
+              "ToolTip": "C:\\Users\\salva\\Documents\\.NETProjects\\QuestForge\\QuestForge.Core\\Entities\\Character.cs",
+              "RelativeToolTip": "QuestForge.Core\\Entities\\Character.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T14:32:46.922Z",
               "EditorCaption": ""
             }
           ]
