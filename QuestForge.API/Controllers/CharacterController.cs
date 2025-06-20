@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using QuestForge.Core.DTOs.Character;
 using QuestForge.Core.Entities;
 using QuestForge.Core.RepositoryInterfaces;
 
@@ -9,10 +11,12 @@ namespace QuestForge.API.Controllers
     public class CharacterController : ControllerBase
     {
         private readonly ICharacterRepository _characterRepository;
+        private readonly IMapper _mapper;
 
-        public CharacterController(ICharacterRepository characterRepository)
+        public CharacterController(ICharacterRepository characterRepository, IMapper mapper)
         {
             _characterRepository = characterRepository;
+            _mapper = mapper;
         }
 
         [HttpGet("{id}")]
@@ -25,15 +29,19 @@ namespace QuestForge.API.Controllers
                 return NotFound();
             }
 
-            return Ok(character);
+            var characterDto = _mapper.Map<CharacterDto>(character);
+
+            return Ok(characterDto);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCharacter([FromBody] Character character)
+        public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto)
         {
+            var character = _mapper.Map<Character>(dto);
             await _characterRepository.AddAsync(character);
 
-            return CreatedAtAction(nameof(GetCharacterById), new { id = character.Id }, character);
+            var characterDto = _mapper.Map<CharacterDto>(character);
+            return CreatedAtAction(nameof(GetCharacterById), new { id = characterDto.Id }, characterDto);
         }
     }
 }

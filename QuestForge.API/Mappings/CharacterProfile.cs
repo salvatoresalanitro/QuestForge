@@ -9,7 +9,7 @@ namespace QuestForge.API.Mappings
         public CharacterProfile()
         {
             CreateMap<Character, CharacterDto>();
-            CreateMap<Character, CreateCharacterDto>();
+            CreateMap<CreateCharacterDto, Character>();
         }
     }
 }
