@@ -5,7 +5,7 @@ namespace QuestForge.Infrastructure.Repositories
 {
     public class CharacterRepository : ICharacterRepository
     {
-        public Task<Character> CreateCharacterAsync(Character character)
+        public Task AddAsync(Character character)
         {
             throw new NotImplementedException();
         }
