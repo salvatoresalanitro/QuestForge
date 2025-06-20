@@ -22,7 +22,7 @@ namespace QuestForge.Core.Entities
         public ItemType Type { get; set; }
         public Character? OwnerCharacter { get; set; }
         public Guid? OwnerCharacterId { get; set; }
-        public Campaign Campaign { get; set; }
+        public Campaign? Campaign { get; set; }
         public Guid CampaignId { get; set; }
     }
 }

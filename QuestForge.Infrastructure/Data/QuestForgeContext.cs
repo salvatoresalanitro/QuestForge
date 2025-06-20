@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using QuestForge.Core.Entities;
 
-namespace Infrastructure.Data
+namespace QuestForge.Infrastructure.Data
 {
     public class QuestForgeContext : DbContext
     {

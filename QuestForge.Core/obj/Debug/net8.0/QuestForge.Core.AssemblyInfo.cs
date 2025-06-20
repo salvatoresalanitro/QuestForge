@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuestForge.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a3559072cdb0865907d06840adc75f4eed87d3a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f28bfceec078b81d74bb65ca081f68f82ceee0d")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuestForge.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuestForge.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
