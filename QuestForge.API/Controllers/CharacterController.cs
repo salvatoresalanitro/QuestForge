@@ -18,7 +18,7 @@ namespace QuestForge.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCharacterById(Guid id)
         {
-            var character = await _characterRepository.GetCharacterByIdAsync(id);
+            var character = await _characterRepository.GetByIdAsync(id);
 
             if(character is null)
             {

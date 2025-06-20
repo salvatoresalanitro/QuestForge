@@ -1,28 +1,56 @@
-﻿using QuestForge.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using QuestForge.Core.Entities;
 using QuestForge.Core.RepositoryInterfaces;
+using QuestForge.Infrastructure.Data;
 
 namespace QuestForge.Infrastructure.Repositories
 {
     public class CharacterRepository : ICharacterRepository
     {
-        public Task AddAsync(Character character)
+        private readonly QuestForgeContext _context;
+        public CharacterRepository(QuestForgeContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteCharacterAsync(Guid characterId)
+        public async Task AddAsync(Character character)
         {
-            throw new NotImplementedException();
+            await _context.Characters.AddAsync(character);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Character> GetCharacterByIdAsync(Guid characterId)
+        public async Task DeleteAsync(Character character)
         {
-            throw new NotImplementedException();
+            _context.Characters.Remove(character);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Character> UpdateCharacterAsync(Character character)
+        public async Task<Character?> GetByIdAsync(Guid characterId)
         {
-            throw new NotImplementedException();
+            var hero = await _context.Characters.FirstOrDefaultAsync(character => character.Id == characterId);
+
+            return hero;
+        }
+
+        public async Task<Character?> UpdateAsync(Character character)
+        {
+            var hero = await _context.Characters.FirstOrDefaultAsync(c => c.Id == character.Id);
+
+            if(hero != null)
+            {
+                hero.ArmorClass = character.ArmorClass;
+                hero.Class = character.Class;
+                hero.Name = character.Name;
+                hero.Items = character.Items;
+                hero.Level = character.Level;
+                hero.Species = character.Species;
+                hero.Initiative = character.Initiative;
+                hero.HitPoints = character.HitPoints;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return hero;
         }
     }
 }
