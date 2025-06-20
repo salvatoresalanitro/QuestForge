@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using QuestForge.Core.Entities;
 
 namespace QuestForge.Core.RepositoryInterfaces
 {
     public interface INpcRepository
     {
+        Task<Npc> GetNpcByIdAsync(Guid npcId);
+        Task<IEnumerable<Npc>> GetAllNpcsAsync();
+        Task<Npc> CreateNpcAsync(Npc npc);
+        Task<Npc> UpdateNpcAsync(Npc npc);
+        Task DeleteNpcAsync(Guid npcId);
+        Task<IEnumerable<Npc>> GetNpcsByCampaignIdAsync(Guid campaignId);
     }
 }
