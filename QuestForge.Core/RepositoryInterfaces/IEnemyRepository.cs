@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuestForge.Core.RepositoryInterfaces
 {
-    internal interface IEnemyRepository
+    public interface IEnemyRepository
     {
     }
 }
