@@ -1,0 +1,16 @@
+﻿using QuestForge.Core.Entities;
+
+namespace QuestForge.Core.DTOs.Character
+{
+    public class CreateCharacterDto
+    {
+        public string Name { get; set; } = string.Empty;
+        public Species Species { get; set; }
+        public Class Class { get; set; }
+        public int Level { get; set; }
+        public int HitPoints { get; set; }
+        public int ArmorClass { get; set; }
+        public int Initiative { get; set; }
+        public Guid CampaignId { get; set; }
+    }
+}
