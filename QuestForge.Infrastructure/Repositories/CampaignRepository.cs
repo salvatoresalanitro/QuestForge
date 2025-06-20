@@ -3,7 +3,7 @@ using QuestForge.Core.RepositoryInterfaces;
 
 namespace QuestForge.Infrastructure.Repositories
 {
-    internal class CampaignRepository : ICampaignRepository
+    public class CampaignRepository : ICampaignRepository
     {
         public Task<Campaign> CreateCampaignAsync(Campaign campaign)
         {

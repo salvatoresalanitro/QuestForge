@@ -3,7 +3,7 @@ using QuestForge.Core.RepositoryInterfaces;
 
 namespace QuestForge.Infrastructure.Repositories
 {
-    internal class NpcRepository : INpcRepository
+    public class NpcRepository : INpcRepository
     {
         public Task<Npc> CreateNpcAsync(Npc npc)
         {

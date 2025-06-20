@@ -3,7 +3,7 @@ using QuestForge.Core.RepositoryInterfaces;
 
 namespace QuestForge.Infrastructure.Repositories
 {
-    internal class ItemRepository : IItemRepository
+    public class ItemRepository : IItemRepository
     {
         public Task<Item> CreateItemAsync(Item item)
         {

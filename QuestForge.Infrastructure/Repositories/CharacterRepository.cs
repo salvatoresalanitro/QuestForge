@@ -3,7 +3,7 @@ using QuestForge.Core.RepositoryInterfaces;
 
 namespace QuestForge.Infrastructure.Repositories
 {
-    internal class CharacterRepository : ICharacterRepository
+    public class CharacterRepository : ICharacterRepository
     {
         public Task<Character> CreateCharacterAsync(Character character)
         {

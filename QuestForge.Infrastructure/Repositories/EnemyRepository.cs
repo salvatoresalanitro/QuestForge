@@ -3,7 +3,7 @@ using QuestForge.Core.RepositoryInterfaces;
 
 namespace QuestForge.Infrastructure.Repositories
 {
-    internal class EnemyRepository : IEnemyRepository
+    public class EnemyRepository : IEnemyRepository
     {
         public Task<Enemy> CreateEnemyAsync(Enemy enemy)
         {
