@@ -14,5 +14,6 @@ namespace QuestForge.Core.Entities
         public double ChallengeRating { get; set; }
         public string Type { get; set; }
         public Campaign Campaign { get; set; }
+        public Guid CampaignId { get; set; }
     }
 }
