@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using QuestForge.API.Mappings;
 using QuestForge.Core.RepositoryInterfaces;
 using QuestForge.Infrastructure.Data;
 using QuestForge.Infrastructure.Repositories;
@@ -14,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<QuestForgeContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("QuestForgeConnection")));
 
+builder.Services.AddAutoMapper(typeof(CharacterProfile));
 builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
 
 var app = builder.Build();
