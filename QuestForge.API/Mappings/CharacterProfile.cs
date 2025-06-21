@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using QuestForge.Core.DTOs.DTOsCharacter;
 using QuestForge.Core.Entities;
+using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.API.Mappings
 {

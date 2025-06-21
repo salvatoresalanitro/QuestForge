@@ -1,6 +1,6 @@
-﻿using QuestForge.Core.DTOs.DTOsCampaign;
+﻿using QuestForge.DTOs.DTOsCampaign;
 
-namespace QuestForge.Core.Interfaces.Services
+namespace QuestForge.Application.Interfaces
 {
     public interface ICampaignService
     {

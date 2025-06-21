@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using QuestForge.Core.DTOs.DTOsCharacter;
+using QuestForge.Application.Interfaces;
 using QuestForge.Core.Entities;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
-using QuestForge.Core.Interfaces.Services;
+using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.Application.Services
 {

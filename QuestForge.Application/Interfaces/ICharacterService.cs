@@ -1,6 +1,6 @@
-﻿using QuestForge.Core.DTOs.DTOsCharacter;
+﻿using QuestForge.DTOs.DTOsCharacter;
 
-namespace QuestForge.Core.Interfaces.Services
+namespace QuestForge.Application.Interfaces
 {
     public interface ICharacterService
     {

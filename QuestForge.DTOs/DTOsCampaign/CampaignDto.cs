@@ -1,6 +1,6 @@
 ﻿using QuestForge.Core.Entities;
 
-namespace QuestForge.Core.DTOs.DTOsCampaign
+namespace QuestForge.DTOs.DTOsCampaign
 {
     public class CampaignDto
     {

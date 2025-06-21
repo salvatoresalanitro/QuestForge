@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using QuestForge.API.Mappings;
+using QuestForge.Application.Interfaces;
 using QuestForge.Application.Services;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
-using QuestForge.Core.Interfaces.Services;
 using QuestForge.Infrastructure.Data;
 using QuestForge.Infrastructure.Repositories;
 

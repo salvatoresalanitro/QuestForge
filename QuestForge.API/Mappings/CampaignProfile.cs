@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using QuestForge.Core.DTOs.DTOsCampaign;
 using QuestForge.Core.Entities;
+using QuestForge.DTOs.DTOsCampaign;
 
 namespace QuestForge.API.Mappings
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QuestForge.Core.DTOs.DTOsCharacter;
-using QuestForge.Core.Interfaces.Services;
+using QuestForge.Application.Interfaces;
+using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.API.Controllers
 {
