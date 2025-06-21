@@ -1,6 +1,8 @@
-﻿namespace QuestForge.Core.Entities
+﻿using QuestForge.Core.Entities;
+
+namespace QuestForge.Core.DTOs.DTOsCampaign
 {
-    public class Campaign
+    public class CampaignDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
