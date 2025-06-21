@@ -9,7 +9,6 @@
         public int Level { get; set; }
         public int HitPoints { get; set; }
         public int ArmorClass { get; set; }
-        public int Initiative { get; set; }
         public List<Item> Items { get; set; } = [];
         public Campaign? Campaign { get; set; }
         public Guid CampaignId { get; set; }

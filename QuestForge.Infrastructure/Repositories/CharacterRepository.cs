@@ -44,7 +44,6 @@ namespace QuestForge.Infrastructure.Repositories
                 hero.Items = character.Items;
                 hero.Level = character.Level;
                 hero.Species = character.Species;
-                hero.Initiative = character.Initiative;
                 hero.HitPoints = character.HitPoints;
             }
 

@@ -10,7 +10,6 @@ namespace QuestForge.Core.DTOs.Character
         public int Level { get; set; }
         public int HitPoints { get; set; }
         public int ArmorClass { get; set; }
-        public int Initiative { get; set; }
         public Guid CampaignId { get; set; }
     }
 }

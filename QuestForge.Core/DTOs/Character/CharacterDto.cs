@@ -10,5 +10,6 @@ namespace QuestForge.Core.DTOs.Character
         public Class Class { get; set; }
         public int Level { get; set; }
         public int HitPoints { get; set; }
+        public int ArmorClass { get; set; }
     }
 }
