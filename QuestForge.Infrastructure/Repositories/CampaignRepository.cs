@@ -39,23 +39,11 @@ namespace QuestForge.Infrastructure.Repositories
             return campaign;
         }
 
-        public async Task<Campaign?> UpdateAsync(Campaign campaign)
+        public async Task UpdateAsync(Campaign campaign)
         {
-            var camp = await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaign.Id);
-
-            if(camp != null)
-            {
-                camp.Name = campaign.Name;
-                camp.Description = campaign.Description;
-                camp.Characters = campaign.Characters;
-                camp.Items = campaign.Items;
-                camp.Npcs = campaign.Npcs;
-                camp.Enemies = campaign.Enemies;
-            }
+            _context.Campaigns.Update(campaign);
 
             await _context.SaveChangesAsync();
-
-            return camp;
         }
     }
 }

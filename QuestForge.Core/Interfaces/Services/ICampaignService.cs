@@ -7,7 +7,7 @@ namespace QuestForge.Core.Interfaces.Services
         Task<CampaignDto?> GetByIdAsync(Guid id);
         Task<IEnumerable<CampaignDto>> GetAllAsync();
         Task<CampaignDto> CreateAsync(CreateCampaignDto createDto);
-        Task<CampaignDto> UpdateAsync(CampaignDto dto);
-        Task DeleteAsync(CampaignDto dto);
+        Task<CampaignDto?> UpdateAsync(Guid id, CreateCampaignDto createDto);
+        Task<bool> DeleteAsync(Guid id);
     }
 }

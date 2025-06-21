@@ -25,10 +25,16 @@ namespace QuestForge.Application.Services
             return _mapper.Map<CampaignDto>(campaign);
         }
 
-        public async Task DeleteAsync(CampaignDto dto)
+        public async Task<bool> DeleteAsync(Guid id)
         {
-            var campaign = _mapper.Map<Campaign>(dto);
+            var campaign = await _repository.GetByIdAsync(id);
+            if(campaign is null)
+            {
+                return false;
+            }
+
             await _repository.DeleteAsync(campaign);
+            return true;
         }
 
         public async Task<IEnumerable<CampaignDto>> GetAllAsync()
@@ -44,11 +50,18 @@ namespace QuestForge.Application.Services
             return campaign is null ? null : _mapper.Map<CampaignDto>(campaign);
         }
 
-        public async Task<CampaignDto> UpdateAsync(CampaignDto dto)
+        public async Task<CampaignDto?> UpdateAsync(Guid id, CreateCampaignDto createDto)
         {
-            var campaign = _mapper.Map<Campaign>(dto);
-            var updatedCampaign = await _repository.UpdateAsync(campaign);
+            var campaign = await _repository.GetByIdAsync(id);
+            if (campaign is null)
+            {
+                return null;
+            }
 
+            campaign.Name = createDto.Name;
+            campaign.Description = createDto.Description;
+
+            await _repository.UpdateAsync(campaign);
             return _mapper.Map<CampaignDto>(campaign);
         }
     }

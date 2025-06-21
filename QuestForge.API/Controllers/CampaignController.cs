@@ -38,5 +38,21 @@ namespace QuestForge.API.Controllers
 
             return CreatedAtAction(nameof(GetCampaignById), new { id = campaignDto.Id }, campaignDto);
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] CreateCampaignDto dto)
+        {
+            var campaignUpdate = await _service.UpdateAsync(id, dto);
+
+            return campaignUpdate is null ? NotFound() : Ok(campaignUpdate);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCampaign(Guid id)
+        {
+            var success = await _service.DeleteAsync(id);
+
+            return success ? NoContent() : NotFound();
+        }
     }
 }
