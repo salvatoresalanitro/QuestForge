@@ -1,38 +1,61 @@
-﻿using QuestForge.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using QuestForge.Core.Entities;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
+using QuestForge.Infrastructure.Data;
 
 namespace QuestForge.Infrastructure.Repositories
 {
     public class CampaignRepository : ICampaignRepository
     {
-        public Task<Campaign> CreateCampaignAsync(Campaign campaign)
+        private readonly QuestForgeContext _context;
+
+        public CampaignRepository(QuestForgeContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteCampaignAsync(Guid campaignId)
+        public async Task AddAsync(Campaign campaign)
         {
-            throw new NotImplementedException();
+            await _context.Campaigns.AddAsync(campaign);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Campaign>> GetAllCampaignAsync()
+        public async Task DeleteAsync(Campaign campaign)
         {
-            throw new NotImplementedException();
+            _context.Campaigns.Remove(campaign);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Campaign> GetCampaignByIdAsync(Guid campaignId)
+        public async Task<IEnumerable<Campaign>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var campaigns = await _context.Campaigns.ToListAsync();
+
+            return campaigns;
         }
 
-        public Task<IEnumerable<Character>> GetCharactersByCampaignIdAsync(Guid campaignId)
+        public async Task<Campaign?> GetByIdAsync(Guid campaignId)
         {
-            throw new NotImplementedException();
+            var campaign = await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaignId);
+            return campaign;
         }
 
-        public Task<Campaign> UpdateCampaignAsync(Campaign campaign)
+        public async Task<Campaign?> UpdateAsync(Campaign campaign)
         {
-            throw new NotImplementedException();
+            var camp = await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaign.Id);
+
+            if(camp != null)
+            {
+                camp.Name = campaign.Name;
+                camp.Description = campaign.Description;
+                camp.Characters = campaign.Characters;
+                camp.Items = campaign.Items;
+                camp.Npcs = campaign.Npcs;
+                camp.Enemies = campaign.Enemies;
+            }
+
+            await _context.SaveChangesAsync();
+
+            return camp;
         }
     }
 }
