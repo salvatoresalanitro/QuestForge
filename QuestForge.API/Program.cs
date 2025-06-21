@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using QuestForge.API.Mappings;
+using QuestForge.Application.Services;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
+using QuestForge.Core.Interfaces.Services;
 using QuestForge.Infrastructure.Data;
 using QuestForge.Infrastructure.Repositories;
 
@@ -17,6 +19,7 @@ builder.Services.AddDbContext<QuestForgeContext>(options =>
 
 builder.Services.AddAutoMapper(typeof(CharacterProfile));
 builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
+builder.Services.AddScoped<ICharacterService, CharacterService>();
 
 var app = builder.Build();
 

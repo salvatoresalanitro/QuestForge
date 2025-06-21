@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuestForge.Application\QuestForge.Application.csproj" />
     <ProjectReference Include="..\QuestForge.Infrastructure\QuestForge.Infrastructure.csproj" />
   </ItemGroup>
 
