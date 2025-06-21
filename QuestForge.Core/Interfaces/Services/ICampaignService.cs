@@ -4,10 +4,10 @@ namespace QuestForge.Core.Interfaces.Services
 {
     public interface ICampaignService
     {
-        Task<CampaignDto> GetByIdAsync(Guid campaignId);
+        Task<CampaignDto?> GetByIdAsync(Guid id);
         Task<IEnumerable<CampaignDto>> GetAllAsync();
-        Task CreateAsync(CreateCampaignDto campaign);
-        Task<CampaignDto> UpdateAsync(CampaignDto campaign);
-        Task DeleteAsync(CampaignDto campaign);
+        Task<CampaignDto> CreateAsync(CreateCampaignDto createDto);
+        Task<CampaignDto> UpdateAsync(CampaignDto dto);
+        Task DeleteAsync(CampaignDto dto);
     }
 }

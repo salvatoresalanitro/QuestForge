@@ -18,6 +18,10 @@ builder.Services.AddDbContext<QuestForgeContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("QuestForgeConnection")));
 
 builder.Services.AddAutoMapper(typeof(CharacterProfile));
+builder.Services.AddAutoMapper(typeof(CampaignProfile));
+
+builder.Services.AddScoped<ICampaignRepository, CampaignRepository>();
+builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddScoped<ICharacterRepository, CharacterRepository>();
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 
