@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuestForge.Core.DTOs.DTOsCharacter;
 using QuestForge.Core.Interfaces.Services;
 
@@ -10,12 +9,10 @@ namespace QuestForge.API.Controllers
     public class CharacterController : ControllerBase
     {
         private readonly ICharacterService _characterService;
-        private readonly IMapper _mapper;
 
-        public CharacterController(ICharacterService characterService, IMapper mapper)
+        public CharacterController(ICharacterService characterService)
         {
             _characterService = characterService;
-            _mapper = mapper;
         }
 
         [HttpGet("{id}")]
