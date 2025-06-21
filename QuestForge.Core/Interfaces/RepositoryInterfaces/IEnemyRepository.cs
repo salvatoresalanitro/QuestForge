@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QuestForge.Core.Entities;
 
-namespace QuestForge.Core.RepositoryInterfaces
+namespace QuestForge.Core.Interfaces.RepositoryInterfaces
 {
     public interface IEnemyRepository
     {

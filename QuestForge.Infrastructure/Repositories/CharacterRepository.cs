@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QuestForge.Core.Entities;
-using QuestForge.Core.RepositoryInterfaces;
+using QuestForge.Core.Interfaces.RepositoryInterfaces;
 using QuestForge.Infrastructure.Data;
 
 namespace QuestForge.Infrastructure.Repositories

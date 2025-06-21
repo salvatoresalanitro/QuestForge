@@ -1,6 +1,6 @@
 ﻿using QuestForge.Core.Entities;
 
-namespace QuestForge.Core.RepositoryInterfaces
+namespace QuestForge.Core.Interfaces.RepositoryInterfaces
 {
     public interface ICampaignRepository
     {

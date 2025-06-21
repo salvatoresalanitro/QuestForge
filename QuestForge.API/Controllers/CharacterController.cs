@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QuestForge.Core.DTOs.Character;
 using QuestForge.Core.Entities;
-using QuestForge.Core.RepositoryInterfaces;
+using QuestForge.Core.Interfaces.RepositoryInterfaces;
 
 namespace QuestForge.API.Controllers
 {
