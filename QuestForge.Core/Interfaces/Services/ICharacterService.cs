@@ -1,4 +1,4 @@
-﻿using QuestForge.Core.DTOs.Character;
+﻿using QuestForge.Core.DTOs.DTOsCharacter;
 
 namespace QuestForge.Core.Interfaces.Services
 {

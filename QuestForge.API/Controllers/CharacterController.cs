@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using QuestForge.Core.DTOs.Character;
+using QuestForge.Core.DTOs.DTOsCharacter;
 using QuestForge.Core.Interfaces.Services;
 
 namespace QuestForge.API.Controllers

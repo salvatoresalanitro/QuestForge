@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using QuestForge.Core.DTOs.Character;
+using QuestForge.Core.DTOs.DTOsCharacter;
 using QuestForge.Core.Entities;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
 using QuestForge.Core.Interfaces.Services;
