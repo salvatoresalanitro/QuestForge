@@ -8,17 +8,17 @@ namespace QuestForge.API.Controllers
     [Route("api/[controller]")]
     public class CharacterController : ControllerBase
     {
-        private readonly ICharacterService _characterService;
+        private readonly ICharacterService _service;
 
         public CharacterController(ICharacterService characterService)
         {
-            _characterService = characterService;
+            _service = characterService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCharacterById(Guid id)
         {
-            var characterDto = await _characterService.GetByIdAsync(id);
+            var characterDto = await _service.GetByIdAsync(id);
 
             return characterDto is null ? NotFound() : Ok(characterDto);
         }
@@ -26,9 +26,25 @@ namespace QuestForge.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto)
         {
-            var characterDto = await _characterService.CreateAsync(dto);
+            var characterDto = await _service.CreateAsync(dto);
 
             return CreatedAtAction(nameof(GetCharacterById), new { id = characterDto.Id }, characterDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateCharacter(Guid id, [FromBody] CreateCharacterDto dto)
+        {
+            var updatedCharacter = await _service.UpdateAsync(id, dto);
+
+            return updatedCharacter is null ? NotFound() : Ok(updatedCharacter);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCharacter(Guid id)
+        {
+            var success = await _service.DeleteAsync(id);
+
+            return success ? NoContent() : NotFound();
         }
     }
 }

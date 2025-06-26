@@ -6,5 +6,7 @@ namespace QuestForge.Application.Interfaces
     {
         Task<CharacterDto?> GetByIdAsync(Guid id);
         Task<CharacterDto> CreateAsync(CreateCharacterDto createCharacterDto);
+        Task<CharacterDto?> UpdateAsync(Guid id, CreateCharacterDto dto);
+        Task<bool> DeleteAsync(Guid id);
     }
 }

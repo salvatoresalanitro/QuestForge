@@ -6,7 +6,7 @@ namespace QuestForge.Core.Interfaces.RepositoryInterfaces
     {
         Task<Character?> GetByIdAsync(Guid characterId);
         Task AddAsync(Character character);
-        Task<Character?> UpdateAsync(Character character);
+        Task UpdateAsync(Character character);
         Task DeleteAsync(Character character);
     }
 }

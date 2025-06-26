@@ -22,10 +22,43 @@ namespace QuestForge.Application.Services
             return CharacterMapper.ToDto(character);
         }
 
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            var character = await _repository.GetByIdAsync(id);
+            if(character is null)
+            {
+                return false;
+            }
+
+            await _repository.DeleteAsync(character);
+            return true;
+        }
+
         public async Task<CharacterDto?> GetByIdAsync(Guid id)
         {
             var character = await _repository.GetByIdAsync(id);
             return character is null ? null : CharacterMapper.ToDto(character);
+        }
+
+        public async Task<CharacterDto?> UpdateAsync(Guid id, CreateCharacterDto dto)
+        {
+            var character = await _repository.GetByIdAsync(id);
+
+            if(character is null)
+            {
+                return null;
+            }
+
+            character.Name = dto.Name;
+            character.Species = dto.Species;
+            character.Class = dto.Class;
+            character.Level = dto.Level;
+            character.HitPoints = dto.HitPoints;
+            character.ArmorClass = dto.ArmorClass;
+            character.Items = dto.Items;
+
+            await _repository.UpdateAsync(character);
+            return CharacterMapper.ToDto(character);
         }
     }
 }

@@ -32,24 +32,11 @@ namespace QuestForge.Infrastructure.Repositories
             return hero;
         }
 
-        public async Task<Character?> UpdateAsync(Character character)
+        public async Task UpdateAsync(Character character)
         {
-            var hero = await _context.Characters.FirstOrDefaultAsync(c => c.Id == character.Id);
-
-            if(hero != null)
-            {
-                hero.ArmorClass = character.ArmorClass;
-                hero.Class = character.Class;
-                hero.Name = character.Name;
-                hero.Items = character.Items;
-                hero.Level = character.Level;
-                hero.Species = character.Species;
-                hero.HitPoints = character.HitPoints;
-            }
+            _context.Characters.Update(character);
 
             await _context.SaveChangesAsync();
-
-            return hero;
         }
     }
 }
