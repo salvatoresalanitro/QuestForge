@@ -42,9 +42,9 @@ namespace QuestForge.API.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] CreateCampaignDto dto)
         {
-            var campaignUpdate = await _service.UpdateAsync(id, dto);
+            var updatedCampaign = await _service.UpdateAsync(id, dto);
 
-            return campaignUpdate is null ? NotFound() : Ok(campaignUpdate);
+            return updatedCampaign is null ? NotFound() : Ok(updatedCampaign);
         }
 
         [HttpDelete("{id}")]
