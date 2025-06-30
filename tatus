@@ -1,0 +1,56 @@
+[1mdiff --git a/QuestForge.Tests.Application/CampaignServiceTest.cs b/QuestForge.Tests.Application/CampaignServiceTest.cs[m
+[1mdeleted file mode 100644[m
+[1mindex e551c39..0000000[m
+[1m--- a/QuestForge.Tests.Application/CampaignServiceTest.cs[m
+[1m+++ /dev/null[m
+[36m@@ -1,50 +0,0 @@[m
+[31m-﻿using Moq;[m
+[31m-using QuestForge.Application.Services;[m
+[31m-using QuestForge.Core.Entities;[m
+[31m-using QuestForge.Core.Interfaces.RepositoryInterfaces;[m
+[31m-using QuestForge.DTOs.DTOsCampaign;[m
+[31m-[m
+[31m-namespace QuestForge.Tests.Application[m
+[31m-{[m
+[31m-    public class CampaignServiceTest[m
+[31m-    {[m
+[31m-        private readonly Mock<ICampaignRepository> _repositoryMock;[m
+[31m-        private readonly CampaignService _service;[m
+[31m-[m
+[31m-        public CampaignServiceTest()[m
+[31m-        {[m
+[31m-            _repositoryMock = new Mock<ICampaignRepository>();[m
+[31m-            _service = new CampaignService(_repositoryMock.Object);[m
+[31m-        }[m
+[31m-[m
+[31m-        [Fact][m
+[31m-        public async Task CreateAsync_should_return_Campaign_with_correct_name()[m
+[31m-        {[m
+[31m-            // Arrange[m
+[31m-            var dto = new CreateCampaignDto() { Name = "Avventure", Description = "Initial description" };[m
+[31m-[m
+[31m-            // Act[m
+[31m-            var result = await _service.CreateAsync(dto);[m
+[31m-[m
+[31m-            // Assert[m
+[31m-            Assert.NotNull(result);[m
+[31m-            Assert.Equal("Avventure", result.Name);[m
+[31m-        }[m
+[31m-[m
+[31m-        [Fact][m
+[31m-        public async Task GetByIdAsync_should_return_campaign_with_correct_name()[m
+[31m-        {[m
+[31m-            // Arrange[m
+[31m-            var campaign = Campaign.Create("Ombre di Arcanath", "La prima avventura di Salvo");[m
+[31m-            _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);[m
+[31m-[m
+[31m-            // Act[m
+[31m-            var result = await _service.GetByIdAsync(campaign.Id);[m
+[31m-[m
+[31m-            // Assert[m
+[31m-            Assert.NotNull(result);[m
+[31m-            Assert.Equal("Ombre di Arcanath", result.Name);[m
+[31m-        }[m
+[31m-[m
+[31m-    }[m
+[31m-}[m
