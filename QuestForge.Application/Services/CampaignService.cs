@@ -55,8 +55,7 @@ namespace QuestForge.Application.Services
                 return null;
             }
 
-            campaign.Name = createDto.Name;
-            campaign.Description = createDto.Description;
+            campaign.Update(createDto.Name, createDto.Description ?? string.Empty);
 
             await _repository.UpdateAsync(campaign);
             return CampaignMapper.ToDto(campaign);

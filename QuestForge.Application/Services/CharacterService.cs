@@ -49,13 +49,7 @@ namespace QuestForge.Application.Services
                 return null;
             }
 
-            character.Name = dto.Name;
-            character.Species = dto.Species;
-            character.Class = dto.Class;
-            character.Level = dto.Level;
-            character.HitPoints = dto.HitPoints;
-            character.ArmorClass = dto.ArmorClass;
-            character.Items = dto.Items;
+            character.Update(dto.Name, dto.Species, dto.Class, dto.Level, dto.HitPoints, dto.ArmorClass);
 
             await _repository.UpdateAsync(character);
             return CharacterMapper.ToDto(character);

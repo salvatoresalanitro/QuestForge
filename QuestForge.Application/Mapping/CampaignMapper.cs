@@ -21,11 +21,7 @@ namespace QuestForge.Application.Mapping
 
         public static Campaign ToEntity(CreateCampaignDto dto)
         {
-            return new Campaign
-            {
-                Name = dto.Name,
-                Description = dto.Description,
-            };
+            return Campaign.Create(dto.Name, dto.Description ?? string.Empty);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace QuestForge.API.Controllers
             _service = characterService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetCharacter{id}")]
         public async Task<IActionResult> GetCharacterById(Guid id)
         {
             var characterDto = await _service.GetByIdAsync(id);
@@ -23,7 +23,7 @@ namespace QuestForge.API.Controllers
             return characterDto is null ? NotFound() : Ok(characterDto);
         }
 
-        [HttpPost]
+        [HttpPost("CreateCharacter")]
         public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto)
         {
             var characterDto = await _service.CreateAsync(dto);
@@ -31,7 +31,7 @@ namespace QuestForge.API.Controllers
             return CreatedAtAction(nameof(GetCharacterById), new { id = characterDto.Id }, characterDto);
         }
 
-        [HttpPut]
+        [HttpPut("UpdateCharacter")]
         public async Task<IActionResult> UpdateCharacter(Guid id, [FromBody] CreateCharacterDto dto)
         {
             var updatedCharacter = await _service.UpdateAsync(id, dto);
@@ -39,7 +39,7 @@ namespace QuestForge.API.Controllers
             return updatedCharacter is null ? NotFound() : Ok(updatedCharacter);
         }
 
-        [HttpDelete]
+        [HttpDelete("DeleteCharacter")]
         public async Task<IActionResult> DeleteCharacter(Guid id)
         {
             var success = await _service.DeleteAsync(id);

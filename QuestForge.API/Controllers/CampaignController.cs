@@ -15,7 +15,7 @@ namespace QuestForge.API.Controllers
             _service = service;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetCampaign{id}")]
         public async Task<IActionResult> GetCampaignById(Guid id)
         {
             var campaignDto = await _service.GetByIdAsync(id);
@@ -23,7 +23,7 @@ namespace QuestForge.API.Controllers
             return campaignDto is null ? NotFound() : Ok(campaignDto);
         }
 
-        [HttpGet]
+        [HttpGet("GetAllCampaigns")]
         public async Task<IActionResult> GetAllCampaigns()
         {
             var campaignsDtos = await _service.GetAllAsync();
@@ -31,7 +31,7 @@ namespace QuestForge.API.Controllers
             return campaignsDtos is null ? NotFound() : Ok(campaignsDtos);
         }
 
-        [HttpPost]
+        [HttpPost("CreateCampaign")]
         public async Task<IActionResult> CreateCampaign([FromBody] CreateCampaignDto dto)
         {
             var campaignDto = await _service.CreateAsync(dto);
@@ -39,7 +39,7 @@ namespace QuestForge.API.Controllers
             return CreatedAtAction(nameof(GetCampaignById), new { id = campaignDto.Id }, campaignDto);
         }
 
-        [HttpPut]
+        [HttpPut("UpdateCampaign")]
         public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] CreateCampaignDto dto)
         {
             var updatedCampaign = await _service.UpdateAsync(id, dto);
@@ -47,7 +47,7 @@ namespace QuestForge.API.Controllers
             return updatedCampaign is null ? NotFound() : Ok(updatedCampaign);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteCampaign{id}")]
         public async Task<IActionResult> DeleteCampaign(Guid id)
         {
             var success = await _service.DeleteAsync(id);

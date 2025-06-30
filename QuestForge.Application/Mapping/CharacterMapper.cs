@@ -22,16 +22,7 @@ namespace QuestForge.Application.Mapping
 
         public static Character ToEntity(CreateCharacterDto dto)
         {
-            return new Character
-            {
-                Name = dto.Name,
-                Species = dto.Species,
-                Class = dto.Class,
-                Level = dto.Level,
-                HitPoints = dto.HitPoints,
-                ArmorClass = dto.ArmorClass,
-                Items = dto.Items,
-            };
+            return Character.Create(dto.Name, dto.Species, dto.Class, dto.Level, dto.HitPoints, dto.ArmorClass);
         }
     }
 }

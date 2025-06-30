@@ -26,6 +26,6 @@ namespace QuestForge.DTOs.DTOsCharacter
         [Required]
         public int ArmorClass { get; set; }
 
-        public List<Item>? Items { get; set; }
+        public List<Item> Items { get; set; } = [];
     }
 }

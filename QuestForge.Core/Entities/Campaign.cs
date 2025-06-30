@@ -2,12 +2,34 @@
 {
     public class Campaign
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string? Description { get; set; }
-        public List<Character>? Characters { get; set; }
-        public List<Item>? Items { get; set; }
-        public List<Npc>? Npcs { get; set; }
-        public List<Enemy>? Enemies { get; set; }
+        public Guid Id { get; init; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public List<Character> Characters { get; init; }
+        public List<Item> Items { get; init; }
+        public List<Npc> Npcs { get; init; }
+        public List<Enemy> Enemies { get; init; }
+
+        private Campaign(string name, string description)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            Description = description;
+            Characters = [];
+            Items = [];
+            Npcs = [];
+            Enemies = [];
+        }
+
+        public static Campaign Create(string name, string description)
+        {
+            return new Campaign(name, description);
+        }
+
+        public void Update(string name, string desciption)
+        {
+            Name = name;
+            Description = desciption;
+        }
     }
 }
