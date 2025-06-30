@@ -1,5 +1,4 @@
 ﻿using QuestForge.Core.Entities;
-using QuestForge.Tests.Application.TestUtils.Builders;
 
 namespace QuestForge.Tests.Application.CampaignTests
 {
