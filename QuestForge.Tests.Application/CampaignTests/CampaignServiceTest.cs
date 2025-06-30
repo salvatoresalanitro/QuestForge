@@ -3,6 +3,7 @@ using QuestForge.Application.Services;
 using QuestForge.Core.Entities;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
 using QuestForge.DTOs.DTOsCampaign;
+using QuestForge.Tests.Application.TestUtils.Builders;
 
 namespace QuestForge.Tests.Application.CampaignTests
 {
@@ -10,11 +11,13 @@ namespace QuestForge.Tests.Application.CampaignTests
     {
         private readonly Mock<ICampaignRepository> _repositoryMock;
         private readonly CampaignService _service;
+        private readonly CampaignBuilder _builder;
 
         public CampaignServiceTest()
         {
             _repositoryMock = new Mock<ICampaignRepository>();
             _service = new CampaignService(_repositoryMock.Object);
+            _builder = new CampaignBuilder();
         }
 
         [Fact]
@@ -62,7 +65,11 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task GetByIdAsync_should_return_null_if_campaign_was_not_found()
         {
             // Arrange
-            var campaign = Campaign.Create("Ombre di Arcanath", "La prima avventura di Salvo");
+            var campaign = _builder
+                .WithName("Ombre di Arcanath")
+                .WithDescription("La prima avventura di Salvo")
+                .Build();
+
             _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
 
             // Act
@@ -76,7 +83,11 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task GetByIdAsync_should_return_not_null_value()
         {
             // Arrange
-            var campaign = Campaign.Create("Ombre di Arcanath", "La prima avventura di Salvo");
+            var campaign = _builder
+                .WithName("Ombre di Arcanath")
+                .WithDescription("La prima avventura di Salvo")
+                .Build();
+
             _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
 
             // Act
@@ -90,7 +101,11 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task GetByIdAsync_should_return_campaign_with_correct_name_and_description()
         {
             // Arrange
-            var campaign = Campaign.Create("Ombre di Arcanath", "La prima avventura di Salvo");
+            var campaign = _builder
+                .WithName("Ombre di Arcanath")
+                .WithDescription("La prima avventura di Salvo")
+                .Build();
+
             _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
 
             // Act
@@ -106,8 +121,16 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task GetAllAsync_should_return_all_correct_campaigns()
         {
             // Arrange
-            var campaignOne = Campaign.Create("Campaign 1", "Description 1");
-            var campaignTwo = Campaign.Create("Campaign 2", "Description 2");
+            var campaignOne = _builder
+                .WithName("Campaign 1")
+                .WithDescription("Description 1")
+                .Build();
+
+            var campaignTwo = _builder
+                .WithName("Campaign 2")
+                .WithDescription("Description 2")
+                .Build();
+
             _repositoryMock.Setup(repo => repo.GetAllAsync()).ReturnsAsync([campaignOne, campaignTwo]);
 
             // Act
@@ -127,7 +150,11 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task UpdateAsync_should_return_null_when_campaign_was_not_found()
         {
             // Arrange
-            var campaign = Campaign.Create("Campaign 1", "Description 1");
+            var campaign = _builder
+                .WithName("Campaign 1")
+                .WithDescription("Description 1")
+                .Build();
+
             var dto = new CreateCampaignDto() { Name = "Ombre di Arcanath", Description = "Description test" };
             _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
 
@@ -142,7 +169,11 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task UpdateAsync_should_return_an_updated_campaign()
         {
             // Arrange
-            var campaign = Campaign.Create("Campaign 1", "Description 1");
+            var campaign = _builder
+                .WithName("Campaign 1")
+                .WithDescription("Description 1")
+                .Build();
+
             var dto = new CreateCampaignDto() { Name = "Ombre di Arcanath", Description = "Description test" };
             _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
 
@@ -159,7 +190,11 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task DeleteAsync_should_return_true_if_campaign_was_deleted()
         {
             // Arrange
-            var campaign = Campaign.Create("Campaign test", "Description test");
+            var campaign = _builder
+                .WithName("Campaign test")
+                .WithDescription("Description test")
+                .Build();
+
             _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
 
             // Act
@@ -173,7 +208,11 @@ namespace QuestForge.Tests.Application.CampaignTests
         public async Task DeleteAsync_should_return_false_if_campaign_was_not_found()
         {
             // Arrange
-            var campaign = Campaign.Create("Campaign test", "Description test");
+            var campaign = _builder
+                .WithName("Campaign test")
+                .WithDescription("Description test")
+                .Build();
+
             _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
 
             // Act
