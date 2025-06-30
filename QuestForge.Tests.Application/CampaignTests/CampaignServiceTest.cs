@@ -59,6 +59,20 @@ namespace QuestForge.Tests.Application.CampaignTests
         }
 
         [Fact]
+        public async Task GetByIdAsync_should_return_null_if_campaign_was_not_found()
+        {
+            // Arrange
+            var campaign = Campaign.Create("Ombre di Arcanath", "La prima avventura di Salvo");
+            _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
+
+            // Act
+            var result = await _service.GetByIdAsync(Guid.NewGuid());
+
+            // Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
         public async Task GetByIdAsync_should_return_not_null_value()
         {
             // Arrange
@@ -107,6 +121,21 @@ namespace QuestForge.Tests.Application.CampaignTests
             Assert.Equal("Description 1", result.ElementAt(0).Description);
             Assert.Equal("Campaign 2", result.ElementAt(1).Name);
             Assert.Equal("Description 2", result.ElementAt(1).Description);
+        }
+
+        [Fact]
+        public async Task UpdateAsync_should_return_null_when_campaign_was_not_found()
+        {
+            // Arrange
+            var campaign = Campaign.Create("Campaign 1", "Description 1");
+            var dto = new CreateCampaignDto() { Name = "Ombre di Arcanath", Description = "Description test" };
+            _repositoryMock.Setup(repo => repo.GetByIdAsync(campaign.Id)).ReturnsAsync(campaign);
+
+            // Act
+            var result = await _service.UpdateAsync(Guid.NewGuid(), dto);
+
+            // Assert
+            Assert.Null(result);
         }
 
         [Fact]
