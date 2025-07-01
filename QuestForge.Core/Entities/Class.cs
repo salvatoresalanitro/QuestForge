@@ -3,7 +3,7 @@
     public class Class
     {
         public int Id { get; init; }
-        public string Name { get; private set; }
+        public string Name { get; private set; } = string.Empty;
 
         public Class(int id, string name)
         {

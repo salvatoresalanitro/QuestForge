@@ -20,9 +20,9 @@ namespace QuestForge.Application.Mapping
             };
         }
 
-        public static Character ToEntity(CreateCharacterDto dto)
+        public static Character ToEntity(CreateCharacterDto dto, int speciesId, int classId)
         {
-            return Character.Create(dto.Name, dto.Species, dto.Class, dto.Level, dto.HitPoints, dto.ArmorClass);
+            return Character.Create(dto.Name, speciesId, classId, dto.Level, dto.HitPoints, dto.ArmorClass);
         }
     }
 }

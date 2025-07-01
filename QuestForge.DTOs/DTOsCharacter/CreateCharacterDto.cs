@@ -10,11 +10,10 @@ namespace QuestForge.DTOs.DTOsCharacter
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        [EnumDataType(typeof(Species))]
-        public Species Species { get; set; }
+        public int SpeciesId { get; set; }
 
-        [EnumDataType(typeof(Class))]
-        public Class Class { get; set; }
+        [Required]
+        public int ClassId { get; set; }
 
         [Required(ErrorMessage = "Minimum level 1 and may not exceed 20")]
         [Range(1, 20)]

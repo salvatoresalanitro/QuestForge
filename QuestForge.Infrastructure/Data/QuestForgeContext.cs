@@ -12,6 +12,8 @@ namespace QuestForge.Infrastructure.Data
         public DbSet<Item> Items => Set<Item>();
         public DbSet<Enemy> Enemies => Set<Enemy>();
         public DbSet<Npc> Npcs => Set<Npc>();
+        public DbSet<Species> Species => Set<Species>();
+        public DbSet<Class> Classes => Set<Class>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,6 +73,34 @@ namespace QuestForge.Infrastructure.Data
                 .HasOne(npc => npc.Campaign)
                 .WithMany(campaign => campaign.Npcs)
                 .HasForeignKey(npc => npc.CampaignId);
+
+            modelBuilder.Entity<Class>().HasData(
+                new Class(1, "Barbarian"),
+                new Class(2, "Bard"),
+                new Class(3, "Cleric"),
+                new Class(4, "Druid"),
+                new Class(5, "Fighter"),
+                new Class(6, "Monk"),
+                new Class(7, "Paladin"),
+                new Class(8, "Ranger"),
+                new Class(9, "Rogue"),
+                new Class(10, "Sorcerer"),
+                new Class(11, "Warlock"),
+                new Class(12, "Wizard")
+            );
+
+            modelBuilder.Entity<Species>().HasData(
+                new Species(1, "Aasimar"),
+                new Species(2, "Dragonborn"),
+                new Species(3, "Dwarf"),
+                new Species(4, "Elf"),
+                new Species(5, "Gnome"),
+                new Species(6, "Goliath"),
+                new Species(7, "Halfling"),
+                new Species(8, "Human"),
+                new Species(9, "Orc"),
+                new Species(10, "Tiefling")
+            );
         }
     }
 }
