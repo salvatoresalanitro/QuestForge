@@ -16,6 +16,8 @@ namespace QuestForge.Infrastructure
 
             service.AddScoped<ICampaignRepository, CampaignRepository>();
             service.AddScoped<ICharacterRepository, CharacterRepository>();
+            service.AddScoped<ISpeciesRepository, SpeciesRepository>();
+            service.AddScoped<IClassRepository, ClassRepository>();
 
             return service;
         }

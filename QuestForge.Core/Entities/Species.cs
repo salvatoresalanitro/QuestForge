@@ -1,16 +1,16 @@
 ﻿namespace QuestForge.Core.Entities
 {
-    public enum Species
+    public class Species
     {
-        Aasimar,
-        Dragonborn,
-        Dwarf,
-        Elf,
-        Gnome,
-        Goliath,
-        Halfling,
-        Human,
-        Orc,
-        Tiefling
+        public int Id { get; init; }
+        public string Name { get; private set; }
+
+        //private Species() { } //for EF Core
+
+        public Species(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }

@@ -1,18 +1,14 @@
 ﻿namespace QuestForge.Core.Entities
 {
-    public enum Class
+    public class Class
     {
-        Barbarian,
-        Bard,
-        Cleric,
-        Druid,
-        Fighter,
-        Monk,
-        Paladin,
-        Ranger,
-        Rogue,
-        Sorcerer,
-        Warlock,
-        Wizard
+        public int Id { get; init; }
+        public string Name { get; private set; }
+
+        public Class(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
     }
 }
