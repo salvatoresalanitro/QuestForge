@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using QuestForge.Core.Entities;
+using QuestForge.DTOs.DTOsItem;
 
 namespace QuestForge.DTOs.DTOsCharacter
 {
@@ -25,6 +25,6 @@ namespace QuestForge.DTOs.DTOsCharacter
         [Required]
         public int ArmorClass { get; set; }
 
-        public List<Item> Items { get; set; } = [];
+        public List<ItemDto> Items { get; set; } = [];
     }
 }
