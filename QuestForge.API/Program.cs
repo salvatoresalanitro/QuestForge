@@ -1,3 +1,4 @@
+using QuestForge.API.Middleware;
 using QuestForge.Application.Interfaces;
 using QuestForge.Application.Services;
 using QuestForge.Infrastructure;
@@ -16,6 +17,7 @@ builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
