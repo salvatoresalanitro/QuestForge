@@ -11,18 +11,20 @@ namespace QuestForge.Application.Mapping
             {
                 Id = character.Id,
                 Name = character.Name,
-                Species = character.Species,
-                Class = character.Class,
+                SpeciesId = character.Species.Id,
+                ClassId = character.Class.Id,
+                SpeciesName = character.Species.Name,
+                ClassName = character.Class.Name,
                 Level = character.Level,
                 HitPoints = character.HitPoints,
                 ArmorClass = character.ArmorClass,
-                Items = character.Items,
+                Items = character.Items.Select(ItemMapper.ToDto).ToList(),
             };
         }
 
-        public static Character ToEntity(CreateCharacterDto dto, int speciesId, int classId)
+        public static Character ToEntity(CreateCharacterDto dto, Species species, Class @class)
         {
-            return Character.Create(dto.Name, speciesId, classId, dto.Level, dto.HitPoints, dto.ArmorClass);
+            return Character.Create(dto.Name, species, @class, dto.Level, dto.HitPoints, dto.ArmorClass);
         }
     }
 }
