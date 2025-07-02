@@ -70,9 +70,9 @@ namespace QuestForge.Infrastructure.Data
                 .WithMany(character => character.Items)
                 .HasForeignKey(item => item.OwnerCharacterId);
             modelBuilder.Entity<Item>()
-                .HasOne(item => item.ItemType)
+                .HasOne(item => item.Type)
                 .WithMany(itemType => itemType.Items)
-                .HasForeignKey(item => item.ItemTypeId)
+                .HasForeignKey(item => item.TypeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Npc>()
@@ -118,8 +118,8 @@ namespace QuestForge.Infrastructure.Data
                 .HasKey(itemType => itemType.Id);
             modelBuilder.Entity<ItemType>()
                 .HasMany(itemType => itemType.Items)
-                .WithOne(item => item.ItemType)
-                .HasForeignKey(item => item.ItemTypeId)
+                .WithOne(item => item.Type)
+                .HasForeignKey(item => item.TypeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Class>().HasData(
@@ -165,17 +165,17 @@ namespace QuestForge.Infrastructure.Data
                 new SubSpecies(12, "High Elf", 4),
                 new SubSpecies(13, "Wood Elf", 4),
                 new SubSpecies(14, "Forest Gnome", 5),
-                new SubSpecies(14, "Rock Gnome", 5),
-                new SubSpecies(15, "Cloud Giant", 6),
-                new SubSpecies(16, "Fire Giant", 6),
-                new SubSpecies(17, "Frost Giant", 6),
-                new SubSpecies(18, "Hill Giant", 6),
-                new SubSpecies(19, "Stone Giant", 6),
-                new SubSpecies(20, "Storm Giant", 6),
-                new SubSpecies(21, "Cloud Giant", 6),
-                new SubSpecies(22, "Abissal", 10),
-                new SubSpecies(23, "Chthonic", 10),
-                new SubSpecies(24, "Infernal", 10)
+                new SubSpecies(15, "Rock Gnome", 5),
+                new SubSpecies(16, "Cloud Giant", 6),
+                new SubSpecies(17, "Fire Giant", 6),
+                new SubSpecies(18, "Frost Giant", 6),
+                new SubSpecies(19, "Hill Giant", 6),
+                new SubSpecies(20, "Stone Giant", 6),
+                new SubSpecies(21, "Storm Giant", 6),
+                new SubSpecies(22, "Cloud Giant", 6),
+                new SubSpecies(23, "Abissal", 10),
+                new SubSpecies(24, "Chthonic", 10),
+                new SubSpecies(25, "Infernal", 10)
             );
 
             modelBuilder.Entity<SubClass>().HasData(
