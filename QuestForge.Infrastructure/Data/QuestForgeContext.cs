@@ -16,6 +16,7 @@ namespace QuestForge.Infrastructure.Data
         public DbSet<Class> Classes => Set<Class>();
         public DbSet<SubSpecies> SubSpecies => Set<SubSpecies>();
         public DbSet<SubClass> SubSubClasses => Set<SubClass>();
+        public DbSet<ItemType> ItemTypes => Set<ItemType>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,6 +69,11 @@ namespace QuestForge.Infrastructure.Data
                 .HasOne(item => item.OwnerCharacter)
                 .WithMany(character => character.Items)
                 .HasForeignKey(item => item.OwnerCharacterId);
+            modelBuilder.Entity<Item>()
+                .HasOne(item => item.ItemType)
+                .WithMany(itemType => itemType.Items)
+                .HasForeignKey(item => item.ItemTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Npc>()
                 .HasKey(npc => npc.Id);
@@ -81,14 +87,16 @@ namespace QuestForge.Infrastructure.Data
             modelBuilder.Entity<Species>()
                 .HasMany(species => species.SubSpecies)
                 .WithOne(subSpecies => subSpecies.Species)
-                .HasForeignKey(subSpecies => subSpecies.SpeciesId);
+                .HasForeignKey(subSpecies => subSpecies.SpeciesId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Class>()
                 .HasKey(@class => @class.Id);
             modelBuilder.Entity<Class>()
                 .HasMany(@class => @class.SubClasses)
                 .WithOne(subClass => subClass.Class)
-                .HasForeignKey(subClass => subClass.ClassId);
+                .HasForeignKey(subClass => subClass.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<SubSpecies>()
                 .HasKey(subSpecies => subSpecies.Id);
@@ -104,6 +112,14 @@ namespace QuestForge.Infrastructure.Data
                 .HasOne(subClass => subClass.Class)
                 .WithMany(@class => @class.SubClasses)
                 .HasForeignKey(subClass => subClass.ClassId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ItemType>()
+                .HasKey(itemType => itemType.Id);
+            modelBuilder.Entity<ItemType>()
+                .HasMany(itemType => itemType.Items)
+                .WithOne(item => item.ItemType)
+                .HasForeignKey(item => item.ItemTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Class>().HasData(
@@ -214,6 +230,17 @@ namespace QuestForge.Infrastructure.Data
                 new SubClass(49, "Evoker", 12),
                 new SubClass(50, "Illusionist", 12)
             );
+
+            modelBuilder.Entity<ItemType>()
+                .HasData(
+                    new ItemType(1, "Weapon"),
+                    new ItemType(2, "Magic Weapon"),
+                    new ItemType(3, "Armor"),
+                    new ItemType(4, "Magic Armor"),
+                    new ItemType(5, "Equipment"),
+                    new ItemType(6, "Magic Equipment"),
+                    new ItemType(7, "Tool")
+                );
         }
     }
 }
