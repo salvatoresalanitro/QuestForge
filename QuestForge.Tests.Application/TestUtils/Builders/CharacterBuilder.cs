@@ -5,8 +5,8 @@ namespace QuestForge.Tests.Application.TestUtils.Builders
     public class CharacterBuilder
     {
         private string _name = "Default name";
-        private int _speciesId = 1;
-        private int _classId = 1;
+        private Species _species = Species.Create(0, "Default species");
+        private Class _class = Class.Create(0, "Default class");
         private int _level = 1;
         private int _hitPoints = 8;
         private int _armorClass = 10;
@@ -18,15 +18,15 @@ namespace QuestForge.Tests.Application.TestUtils.Builders
             return this;
         }
 
-        public CharacterBuilder WithSpeciesId(int speciesId)
+        public CharacterBuilder WithSpecies(int id, string name)
         {
-            _speciesId = speciesId;
+            _species = Species.Create(id, name);
             return this;
         }
 
-        public CharacterBuilder WithClassId(int classId)
+        public CharacterBuilder WithClass(int id, string name)
         {
-            _classId = classId;
+            _class = Class.Create(id, name);
             return this;
         }
 
@@ -52,6 +52,11 @@ namespace QuestForge.Tests.Application.TestUtils.Builders
         {
             _items.Add(Item.Create(name, description, typeId));
             return this;
+        }
+
+        public Character Build()
+        {
+            return Character.Create(_name, _species, _class, _level, _hitPoints, _armorClass);
         }
     }
 }

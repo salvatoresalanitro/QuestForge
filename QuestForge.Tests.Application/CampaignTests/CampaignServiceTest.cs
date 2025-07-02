@@ -62,7 +62,7 @@ namespace QuestForge.Tests.Application.CampaignTests
         }
 
         [Fact]
-        public async Task GetByIdAsync_should_return_null_if_campaign_was_not_found()
+        public async Task GetByIdAsync_should_return_null_if_campaign_is_not_found()
         {
             // Arrange
             var campaign = _builder
@@ -147,7 +147,7 @@ namespace QuestForge.Tests.Application.CampaignTests
         }
 
         [Fact]
-        public async Task UpdateAsync_should_return_null_when_campaign_was_not_found()
+        public async Task UpdateAsync_should_return_null_when_campaign_is_not_found()
         {
             // Arrange
             var campaign = _builder
@@ -187,7 +187,7 @@ namespace QuestForge.Tests.Application.CampaignTests
         }
 
         [Fact]
-        public async Task DeleteAsync_should_return_true_if_campaign_was_deleted()
+        public async Task DeleteAsync_should_return_true_if_campaign_is_deleted()
         {
             // Arrange
             var campaign = _builder
@@ -205,7 +205,7 @@ namespace QuestForge.Tests.Application.CampaignTests
         }
 
         [Fact]
-        public async Task DeleteAsync_should_return_false_if_campaign_was_not_found()
+        public async Task DeleteAsync_should_return_false_if_campaign_is_not_found()
         {
             // Arrange
             var campaign = _builder

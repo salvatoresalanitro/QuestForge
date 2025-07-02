@@ -15,14 +15,14 @@ namespace QuestForge.Infrastructure.Repositories
         }
         public async Task<Species?> GetByIdAsync(int id)
         {
-            var species = await _context.Species.FirstOrDefaultAsync();
+            var species = await _context.AllSpecies.FirstOrDefaultAsync();
 
             return species;
         }
 
         public async Task<IEnumerable<Species>> GetAllAsync()
         {
-            return await _context.Species.ToListAsync();
+            return await _context.AllSpecies.ToListAsync();
         }
     }
 }
