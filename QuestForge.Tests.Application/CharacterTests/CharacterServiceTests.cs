@@ -102,6 +102,30 @@ namespace QuestForge.Tests.Application.CharacterTests
             Assert.True(result);
         }
 
+        [Fact]
+        public async Task DeleteAsync_should_false_if_character_is_not_found()
+        {
+            // Arrange
+            var character = _builder
+                .WithName("Sarophin")
+                .WithSpecies(8, "Human")
+                .WithClass(7, "Paladin")
+                .WithLevel(1)
+                .WithHitPoints(10)
+                .WithArmorClass(15)
+                .Build();
+
+            SetupMockLookups(8, "Human", 7, "Paladin");
+
+            _characterRepositoryMock.Setup(repo => repo.GetByIdAsync(character.Id)).ReturnsAsync(character);
+
+            // Act
+            var result = await _service.DeleteAsync(Guid.NewGuid());
+
+            // Assert
+            Assert.False(result);
+        }
+
         private void SetupMockLookups(int speciesId, string speciesName, int classId, string className)
         {
             _speciesRepositoryMock
