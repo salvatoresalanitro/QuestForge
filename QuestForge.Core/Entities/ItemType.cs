@@ -6,10 +6,15 @@
         public string Name { get; private set; } = string.Empty;
         public List<Item> Items { get; private set; } = [];
 
-        public ItemType(int id, string name)
+        private ItemType(int id, string name)
         {
             Id = id;
             Name = name;
+        }
+
+        public static ItemType Create(int id, string name)
+        {
+            return new ItemType(id, name);
         }
     }
 }

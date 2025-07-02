@@ -6,10 +6,15 @@
         public string Name { get; private set; } = string.Empty;
         public List<SubSpecies> SubSpecies { get; private set; } = [];
 
-        public Species(int id, string name)
+        private Species(int id, string name)
         {
             Id = id;
             Name = name;
+        }
+
+        public static Species Create(int id, string name)
+        {
+            return new Species(id, name);
         }
     }
 }

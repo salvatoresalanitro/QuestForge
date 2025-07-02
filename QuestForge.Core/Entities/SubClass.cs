@@ -13,11 +13,16 @@ namespace QuestForge.Core.Entities
         public int ClassId { get; private set; }
         public Class Class { get; private set; } = null!;
 
-        public SubClass(int id, string name, int classId)
+        private SubClass(int id, string name, int classId)
         {
             Id = id;
             Name = name;
             ClassId = classId;
+        }
+
+        public static SubClass Create(int id, string name, int classId)
+        {
+            return new SubClass(id, name, classId);
         }
     }
 }
