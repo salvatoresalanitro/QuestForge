@@ -1,12 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace QuestForge.Core.Entities
+﻿namespace QuestForge.Core.Entities
 {
-    internal class Character
+    public class Character
     {
+        public Guid Id { get; init; }
+        public string Name { get; private set; }
+        public Species Species { get; private set; } = null!;
+        public Class Class { get; private set; } = null!;
+        public int Level { get; private set; }
+        public int HitPoints { get; private set; }
+        public int ArmorClass { get; private set; }
+        public List<Item> Items { get; init; } = [];
+        public Campaign Campaign { get; private set; } = null!;
+        public Guid CampaignId { get; private set; }
+
+        private Character(string name, Species species, Class @class, int level, int hitPoints, int armorClass)
+        {
+            Id = Guid.NewGuid();
+            Name = name;
+            Species = species;
+            Class= @class;
+            Level = level;
+            HitPoints = hitPoints;
+            ArmorClass = armorClass;
+            Items = [];
+        }
+
+        public static Character Create(string name, Species species, Class @class, int level, int hitPoints, int armorClass)
+        {
+            return new Character(name, species, @class, level, hitPoints, armorClass);
+        }
+
+        public void Update(string name, Species species, Class @class, int level, int hitPoints, int armorClass)
+        {
+            Name = name;
+            Species = species;
+            Class = @class;
+            Level = level;
+            HitPoints = hitPoints;
+            ArmorClass = armorClass;
+        }
     }
 }

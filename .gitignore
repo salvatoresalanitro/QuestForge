@@ -41,6 +41,10 @@ bld/
 # Visual Studio 2017 auto generated files
 Generated\ Files/
 
+# SqlLite
+*.db-shm
+*.db-wal
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
@@ -97,6 +101,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+**/obj/
 
 # Chutzpah Test files
 _Chutzpah*
