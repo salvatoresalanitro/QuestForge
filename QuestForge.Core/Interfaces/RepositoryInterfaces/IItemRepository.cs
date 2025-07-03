@@ -4,11 +4,11 @@ namespace QuestForge.Core.Interfaces.RepositoryInterfaces
 {
     public interface IItemRepository
     {
-        Task<Item> GetItemByIdAsync(Guid itemId);
-        Task<IEnumerable<Item>> GetAllItemsAsync();
-        Task<Item> CreateItemAsync(Item item);
-        Task<Item> UpdateItemAsync(Item item);
-        Task DeleteItemAsync(Guid itemId);
-        Task<IEnumerable<Item>> GetItemsByCampaignIdAsync(Guid campaignId);
+        Task<Item> GetByIdAsync(Guid itemId);
+        Task<IEnumerable<Item>> GetAllAsync();
+        Task<Item> CreateAsync(Item item);
+        Task<Item> UpdateAsync(Item item);
+        Task DeleteAsync(Guid itemId);
+        Task<IEnumerable<Item>> GetByCampaignIdAsync(Guid campaignId);
     }
 }
