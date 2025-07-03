@@ -12,17 +12,17 @@
         public Campaign Campaign { get; private set; } = null!;
         public Guid CampaignId { get; private set; }
 
-        private Item(string name, string description, int typeId)
+        private Item(string name, string description, ItemType type)
         {
             Id = Guid.NewGuid();
             Name = name;
             Description = description;
-            TypeId = typeId;
+            Type = type;
         }
 
-        public static Item Create(string name, string description, int typeId)
+        public static Item Create(string name, string description, ItemType type)
         {
-            return new Item(name, description, typeId);
+            return new Item(name, description, type);
         }
     }
 }
