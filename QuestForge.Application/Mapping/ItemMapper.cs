@@ -11,7 +11,8 @@ namespace QuestForge.Application.Mapping
             {
                 Id = item.Id,
                 Name = item.Name,
-                TypeId = item.TypeId,
+                Description = item.Description,
+                TypeId = item.Type.Id,
                 TypeName = item.Type.Name
             };
         }
