@@ -1,5 +1,6 @@
 ﻿using QuestForge.Application.Interfaces;
 using QuestForge.Application.Mapping;
+using QuestForge.Core.Exceptions;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
 using QuestForge.DTOs.DTOsCharacter;
 
@@ -49,7 +50,12 @@ namespace QuestForge.Application.Services
         public async Task<CharacterDto?> GetByIdAsync(Guid id)
         {
             var character = await _characterRepository.GetByIdAsync(id);
-            return character is null ? null : CharacterMapper.ToDto(character);
+            if (character is null)
+            {
+                throw new NotFoundException("Character not found");
+            }
+
+            return CharacterMapper.ToDto(character);
         }
 
         public async Task<CharacterDto?> UpdateAsync(Guid id, CreateCharacterDto dto)
