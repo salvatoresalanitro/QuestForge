@@ -72,7 +72,7 @@ namespace QuestForge.Application.Services
 
             if(character is null)
             {
-                throw new InvalidOperationException("Character not found");
+                throw new NotFoundException("Character not found");
             }
 
             character.Update(dto.Name, species, @class, dto.Level, dto.HitPoints, dto.ArmorClass);

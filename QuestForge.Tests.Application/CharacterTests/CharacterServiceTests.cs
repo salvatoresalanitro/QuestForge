@@ -4,6 +4,7 @@ using QuestForge.Core.Entities;
 using QuestForge.Core.Exceptions;
 using QuestForge.Core.Interfaces.RepositoryInterfaces;
 using QuestForge.DTOs.DTOsCharacter;
+using QuestForge.DTOs.DTOsItem;
 using QuestForge.Tests.Application.TestUtils.Builders;
 using QuestForge.Tests.Application.TestUtils.Seeds;
 
@@ -37,15 +38,15 @@ namespace QuestForge.Tests.Application.CharacterTests
             var dto = new CreateCharacterDto()
             {
                 Name = "Andor",
-                SpeciesId = 8,
-                ClassId = 7,
+                SpeciesId = SpeciesIds.Human,
+                ClassId = ClassIds.Paladin,
                 Level = 1,
                 HitPoints = 10,
                 ArmorClass = 15,
                 Items = []
             };
 
-            SetupMockLookups(8, "Human", 7, "Paladin");
+            SetupMockLookups(SpeciesIds.Human, "Human", ClassIds.Paladin, "Paladin");
 
             // Act
             var result = await _service.CreateAsync(dto);
@@ -61,15 +62,15 @@ namespace QuestForge.Tests.Application.CharacterTests
             var dto = new CreateCharacterDto()
             {
                 Name = "Andor",
-                SpeciesId = 8,
-                ClassId = 7,
+                SpeciesId = SpeciesIds.Human,
+                ClassId = ClassIds.Paladin,
                 Level = 1,
                 HitPoints = 10,
                 ArmorClass = 15,
                 Items = []
             };
 
-            SetupMockLookups(8, "Human", 7, "Paladin");
+            SetupMockLookups(SpeciesIds.Human, "Human", ClassIds.Paladin, "Paladin");
 
             // Act
             var result = await _service.CreateAsync(dto);
@@ -103,15 +104,15 @@ namespace QuestForge.Tests.Application.CharacterTests
 
             var character = _characterBuilder
                 .WithName("Sarophin")
-                .WithSpecies(8, "Human")
-                .WithClass(7, "Paladin")
+                .WithSpecies(SpeciesIds.Human, "Human")
+                .WithClass(ClassIds.Paladin, "Paladin")
                 .WithLevel(1)
                 .WithHitPoints(10)
                 .WithArmorClass(15)
                 .AddItem(item)
                 .Build();
 
-            SetupMockLookups(8, "Human", 7, "Paladin");
+            SetupMockLookups(SpeciesIds.Human, "Human", ClassIds.Paladin, "Paladin");
 
             _characterRepositoryMock.Setup(repo => repo.GetByIdAsync(character.Id)).ReturnsAsync(character);
 
@@ -139,8 +140,8 @@ namespace QuestForge.Tests.Application.CharacterTests
 
             var character = _characterBuilder
                 .WithName("Sarophin")
-                .WithSpecies(8, "Human")
-                .WithClass(7, "Paladin")
+                .WithSpecies(SpeciesIds.Human, "Human")
+                .WithClass(ClassIds.Paladin, "Paladin")
                 .WithLevel(1)
                 .WithHitPoints(10)
                 .WithArmorClass(15)
@@ -168,6 +169,104 @@ namespace QuestForge.Tests.Application.CharacterTests
         }
 
         [Fact]
+        public async Task UpdateAsync_should_trhow_a_NotFoundException_if_character_is_not_found()
+        {
+            // Arrange
+            var itemType = _itemTypeBuilder
+                .WithId(ItemTypeIds.Equipment)
+                .WithName(nameof(ItemTypeIds.Equipment))
+                .Build();
+
+            var item = _itemBuilder
+                .WithName("Potion")
+                .WithDescription("Potion of Healing")
+                .WithItemType(itemType)
+                .Build();
+
+            var character = _characterBuilder
+                .WithName("Sarophin")
+                .WithSpecies(SpeciesIds.Human, "Human")
+                .WithClass(ClassIds.Paladin, "Paladin")
+                .WithLevel(1)
+                .WithHitPoints(10)
+                .WithArmorClass(15)
+                .AddItem(item)
+                .Build();
+
+            SetupMockLookups(SpeciesIds.Human, "Human", ClassIds.Paladin, "Paladin");
+
+            _characterRepositoryMock.Setup(repo => repo.GetByIdAsync(character.Id)).ReturnsAsync(character);
+            var dto = new CreateCharacterDto()
+            {
+                Name = "Sarophin",
+                SpeciesId = SpeciesIds.Human,
+                ClassId = ClassIds.Paladin,
+                Level = 1,
+                HitPoints = 10,
+                ArmorClass = 15,
+                Items = []
+            };
+
+            // Act
+            var result = _service.UpdateAsync(Guid.NewGuid(), dto); //pass a new guid to trigger a not found id
+
+            // Assert
+            await Assert.ThrowsAsync<NotFoundException>(() => result);
+        }
+
+        [Fact]
+        public async Task UpdateAsync_should_return_an_updated_character_if_character_is_found()
+        {
+            // Arrange
+            var itemType = _itemTypeBuilder
+                .WithId(ItemTypeIds.Equipment)
+                .WithName(nameof(ItemTypeIds.Equipment))
+                .Build();
+
+            var item = _itemBuilder
+                .WithName("Potion")
+                .WithDescription("Potion of Healing")
+                .WithItemType(itemType)
+                .Build();
+
+            var character = _characterBuilder
+                .WithName("Sarophin")
+                .WithSpecies(SpeciesIds.Human, "Human")
+                .WithClass(ClassIds.Paladin, "Paladin")
+                .WithLevel(1)
+                .WithHitPoints(10)
+                .WithArmorClass(15)
+                .AddItem(item)
+                .Build();
+
+
+            _characterRepositoryMock.Setup(repo => repo.GetByIdAsync(character.Id)).ReturnsAsync(character);
+            var dto = new CreateCharacterDto()
+            {
+                Name = "Andor",
+                SpeciesId = SpeciesIds.Human,
+                ClassId = ClassIds.Warlock,
+                Level = 2,
+                HitPoints = 18,
+                ArmorClass = 17,
+                Items = []
+            };
+
+            SetupMockLookups(SpeciesIds.Human, "Human", ClassIds.Warlock, "Warlock");
+
+            // Act
+            var result = await _service.UpdateAsync(character.Id, dto);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Andor", result.Name);
+            Assert.Equal(ClassIds.Warlock, result.ClassId);
+            Assert.Equal(2, result.Level);
+            Assert.Equal(18, result.HitPoints);
+            Assert.Equal(17, result.ArmorClass);
+        }
+
+        [Fact]
         public async Task DeleteAsync_should_true_if_character_is_deleted()
         {
             // Arrange
@@ -180,7 +279,7 @@ namespace QuestForge.Tests.Application.CharacterTests
                 .WithArmorClass(15)
                 .Build();
 
-            SetupMockLookups(8, "Human", 7, "Paladin");
+            SetupMockLookups(SpeciesIds.Human, "Human", ClassIds.Paladin, "Paladin");
 
             _characterRepositoryMock.Setup(repo => repo.GetByIdAsync(character.Id)).ReturnsAsync(character);
 
@@ -204,7 +303,7 @@ namespace QuestForge.Tests.Application.CharacterTests
                 .WithArmorClass(15)
                 .Build();
 
-            SetupMockLookups(8, "Human", 7, "Paladin");
+            SetupMockLookups(SpeciesIds.Human, "Human", ClassIds.Paladin, "Paladin");
 
             _characterRepositoryMock.Setup(repo => repo.GetByIdAsync(character.Id)).ReturnsAsync(character);
 
