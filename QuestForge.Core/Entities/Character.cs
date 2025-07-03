@@ -30,6 +30,16 @@
             return new Character(name, species, @class, level, hitPoints, armorClass);
         }
 
+        public void AddItem(Item item)
+        {
+            Items.Add(item);
+        }
+
+        public void AddItems(IEnumerable<Item> items)
+        {
+            Items.AddRange(items);
+        }
+
         public void Update(string name, Species species, Class @class, int level, int hitPoints, int armorClass)
         {
             Name = name;
