@@ -1,4 +1,5 @@
-﻿using QuestForge.Core.Entities;
+﻿using System.Runtime.InteropServices;
+using QuestForge.Core.Entities;
 
 namespace QuestForge.Tests.Application.TestUtils.Builders
 {
@@ -48,15 +49,17 @@ namespace QuestForge.Tests.Application.TestUtils.Builders
             return this;
         }
 
-        public CharacterBuilder AddItem(string name, string description, int typeId)
+        public CharacterBuilder AddItem(Item item)
         {
-            _items.Add(Item.Create(name, description, typeId));
+            _items.Add(item);
             return this;
         }
 
         public Character Build()
         {
-            return Character.Create(_name, _species, _class, _level, _hitPoints, _armorClass);
+            var character = Character.Create(_name, _species, _class, _level, _hitPoints, _armorClass);
+            character.AddItems(_items);
+            return character;
         }
     }
 }
