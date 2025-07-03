@@ -5,32 +5,32 @@ namespace QuestForge.Infrastructure.Repositories
 {
     public class ItemRepository : IItemRepository
     {
-        public Task<Item> CreateItemAsync(Item item)
+        public Task<Item> CreateAsync(Item item)
         {
             throw new NotImplementedException();
         }
 
-        public Task DeleteItemAsync(Guid itemId)
+        public Task DeleteAsync(Guid itemId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Item>> GetAllItemsAsync()
+        public Task<IEnumerable<Item>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Item> GetItemByIdAsync(Guid itemId)
+        public Task<Item> GetByIdAsync(Guid itemId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Item>> GetItemsByCampaignIdAsync(Guid campaignId)
+        public Task<IEnumerable<Item>> GetByCampaignIdAsync(Guid campaignId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Item> UpdateItemAsync(Item item)
+        public Task<Item> UpdateAsync(Item item)
         {
             throw new NotImplementedException();
         }
