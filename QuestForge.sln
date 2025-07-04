@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestForge.DTOs", "QuestFor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestForge.Tests.Application", "QuestForge.Tests.Application\QuestForge.Tests.Application.csproj", "{82EB08DC-2A5B-4567-9BCA-90F00E39F249}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestForge.Domain", "QuestForge.Domain\QuestForge.Domain.csproj", "{0C6306C2-C46A-4F02-B90D-5AE0278010A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{82EB08DC-2A5B-4567-9BCA-90F00E39F249}.Release|x64.Build.0 = Release|Any CPU
 		{82EB08DC-2A5B-4567-9BCA-90F00E39F249}.Release|x86.ActiveCfg = Release|Any CPU
 		{82EB08DC-2A5B-4567-9BCA-90F00E39F249}.Release|x86.Build.0 = Release|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Debug|x64.Build.0 = Debug|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Debug|x86.Build.0 = Debug|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Release|x64.ActiveCfg = Release|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Release|x64.Build.0 = Release|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{0C6306C2-C46A-4F02-B90D-5AE0278010A7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
