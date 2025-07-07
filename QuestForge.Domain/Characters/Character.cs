@@ -1,20 +1,22 @@
 ﻿using QuestForge.Domain.Campaigns;
 using QuestForge.Domain.Items;
 using QuestForge.Domain.ValueObjects;
+using QuestForge.Domain.ValueObjects.CharacterVO;
 
 namespace QuestForge.Domain.Characters
 {
     public class Character
     {
-        public CharacterId Id { get; init; }
-        public string Name { get; init; } = string.Empty;
-        public Species Species { get; init; }
-        public Class Class { get; init; }
-        public int Level { get; init; }
-        public int HitPoints { get; init; }
-        public int ArmorClass { get; init; }
-        public List<Item> Items { get; init; } = [];
-        public CampaignId CampaignId { get; init; }
+        public CharacterId Id { get; }
+        public CharacterName Name { get; }
+        public Species Species { get; }
+        public Class Class { get; }
+        public Level Level { get; }
+        public HitPoints HitPoints { get; }
+        public ArmorClass ArmorClass { get; }
+        private readonly List<Item> _items = [];
+        public IReadOnlyCollection<Item> Items => _items;
+        public CampaignId CampaignId { get; init; } = null!;
 
         private Character(
             string name,
@@ -26,12 +28,12 @@ namespace QuestForge.Domain.Characters
         )
         {
             Id = CharacterId.Create();
-            Name = name;
+            Name = CharacterName.Create(name);
             Species = species;
             Class = @class;
-            Level = level;
-            HitPoints = hitPoints;
-            ArmorClass = armorClass;
+            Level = Level.Create(level);
+            HitPoints = HitPoints.Create(hitPoints);
+            ArmorClass = ArmorClass.Create(armorClass);
         }
 
         public static Character Create(
