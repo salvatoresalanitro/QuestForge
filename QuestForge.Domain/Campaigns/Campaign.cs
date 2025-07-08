@@ -14,5 +14,17 @@ namespace QuestForge.Domain.Campaigns
         public IReadOnlyCollection<Item> Items => _items;
         //public List<Npc> Npcs { get; init; }
         //public List<Enemy> Enemies { get; init; }
+
+        private Campaign (string name, string description)
+        {
+            Id = Guid.NewGuid ();
+            Name = name;
+            Description = description;
+        }
+
+        public static Campaign Create(string name, string description)
+        {
+            return new Campaign (name, description);
+        }
     }
 }
