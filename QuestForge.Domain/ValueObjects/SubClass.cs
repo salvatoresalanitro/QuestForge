@@ -3,6 +3,6 @@
     public record SubClass
     {
         public int Id { get; init; }
-        public string Name { get; private set; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
     }
 }
