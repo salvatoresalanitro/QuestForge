@@ -30,7 +30,7 @@ namespace QuestForge.API.Middleware
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, HttpStatusCode statusCode, string message, string? detail = null)
+        private static Task HandleExceptionAsync(HttpContext context, HttpStatusCode statusCode, string message, string? detail = null)
         {
             context.Response.StatusCode = (int)statusCode;
             context.Response.ContentType = "application/json";
