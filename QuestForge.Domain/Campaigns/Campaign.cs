@@ -1,13 +1,14 @@
 ﻿using QuestForge.Domain.Characters;
 using QuestForge.Domain.Items;
+using QuestForge.Domain.ValueObjects.CampaignVO;
 
 namespace QuestForge.Domain.Campaigns
 {
     public class Campaign
     {
-        public Guid Id { get; }
-        public string Name { get; }
-        public string Description { get; }
+        public CampaignId Id { get; }
+        public CampaignName Name { get; }
+        public CampaignDescription Description { get; }
         private List<Character> _characters = [];
         public IReadOnlyCollection<Character> Characters => _characters;
         private readonly List<Item> _items = [];
@@ -17,9 +18,9 @@ namespace QuestForge.Domain.Campaigns
 
         private Campaign (string name, string description)
         {
-            Id = Guid.NewGuid ();
-            Name = name;
-            Description = description;
+            Id = CampaignId.Create();
+            Name = CampaignName.Create(name);
+            Description = CampaignDescription.Create(description);
         }
 
         public static Campaign Create(string name, string description)
