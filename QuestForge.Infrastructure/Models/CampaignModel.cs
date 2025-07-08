@@ -1,4 +1,4 @@
-﻿namespace QuestForge.Domain.Campaigns
+﻿namespace QuestForge.Infrastructure.Models
 {
     public class CampaignModel
     {

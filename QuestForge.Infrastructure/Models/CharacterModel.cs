@@ -1,8 +1,6 @@
-﻿using QuestForge.Domain.Campaigns;
-using QuestForge.Domain.Items;
-using QuestForge.Domain.ValueObjects;
+﻿using QuestForge.Domain.ValueObjects;
 
-namespace QuestForge.Domain.Characters
+namespace QuestForge.Infrastructure.Models
 {
     public class CharacterModel
     {

@@ -1,4 +1,4 @@
-﻿namespace QuestForge.Domain.Items
+﻿namespace QuestForge.Infrastructure.Models
 {
     public class ItemModel
     {
