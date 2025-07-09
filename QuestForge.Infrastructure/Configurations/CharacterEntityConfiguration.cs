@@ -9,6 +9,7 @@ namespace QuestForge.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<CharacterModel> builder)
         {
             builder.ToTable("Characters");
+
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Id)
