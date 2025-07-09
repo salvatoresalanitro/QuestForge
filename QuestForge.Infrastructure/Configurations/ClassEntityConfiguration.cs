@@ -17,6 +17,7 @@ namespace QuestForge.Infrastructure.Configurations
                .ValueGeneratedNever();
 
             builder.Property(c => c.Name)
+                .HasColumnName("Name")
                 .IsRequired();
 
             builder.HasMany(c => c.SubClasses)

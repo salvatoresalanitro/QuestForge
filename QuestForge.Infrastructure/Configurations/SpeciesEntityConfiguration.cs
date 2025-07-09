@@ -17,12 +17,13 @@ namespace QuestForge.Infrastructure.Configurations
                .ValueGeneratedNever();
 
             builder.Property(s => s.Name)
-                   .IsRequired();
+                .HasColumnName("Name")
+                .IsRequired();
 
             builder.HasMany(s => s.AllSubSpecies)
-                   .WithOne(ss => ss.Species)
-                   .HasForeignKey(ss => ss.SpeciesId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                .WithOne(ss => ss.Species)
+                .HasForeignKey(ss => ss.SpeciesId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

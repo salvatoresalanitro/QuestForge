@@ -17,6 +17,7 @@ namespace QuestForge.Infrastructure.Configurations
                .ValueGeneratedNever();
 
             builder.Property(ss => ss.Name)
+                .HasColumnName("Name")
                 .IsRequired();
 
             builder.HasOne(ss => ss.Species)

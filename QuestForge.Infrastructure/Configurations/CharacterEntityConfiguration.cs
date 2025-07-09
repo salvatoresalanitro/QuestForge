@@ -13,42 +13,42 @@ namespace QuestForge.Infrastructure.Configurations
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Id)
-                   .HasColumnName("Id")
-                   .ValueGeneratedNever();
+                .HasColumnName("Id")
+                .ValueGeneratedNever();
 
             builder.Property(c => c.Name)
-                   .HasColumnName("Name")
-                   .IsRequired()
-                   .HasMaxLength(25);
+                .HasColumnName("Name")
+                .IsRequired()
+                .HasMaxLength(25);
 
             builder.Property(c => c.Level)
-                   .HasColumnName("Level")
-                   .IsRequired();
+                .HasColumnName("Level")
+                .IsRequired();
 
             builder.Property(c => c.HitPoints)
-                   .HasColumnName("HitPoints")
-                   .IsRequired();
+                .HasColumnName("HitPoints")
+                .IsRequired();
 
             builder.Property(c => c.ArmorClass)
-                   .HasColumnName("ArmorClass")
-                   .IsRequired();
+                .HasColumnName("ArmorClass")
+                .IsRequired();
 
             builder.HasOne(c => c.Species)
-                   .WithMany()
-                   .HasForeignKey("SpeciesId");
+                .WithMany()
+                .HasForeignKey("SpeciesId");
 
             builder.HasOne(c => c.Class)
-                   .WithMany()
-                   .HasForeignKey("ClassId");
+                .WithMany()
+                .HasForeignKey("ClassId");
 
             builder.HasMany(c => c.Items)
-                   .WithOne(i => i.Character)
-                   .HasForeignKey("CharacterId")
-                   .OnDelete(DeleteBehavior.Restrict);
+                .WithOne(i => i.Character)
+                .HasForeignKey("CharacterId")
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(c => c.Campaign)
-                   .WithMany(ca => ca.Characters)
-                   .HasForeignKey("CampaignId");
+                .WithMany(ca => ca.Characters)
+                .HasForeignKey("CampaignId");
         }
     }
 }
