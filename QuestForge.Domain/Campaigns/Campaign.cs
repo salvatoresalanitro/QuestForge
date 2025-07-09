@@ -13,19 +13,47 @@ namespace QuestForge.Domain.Campaigns
         public IReadOnlyCollection<Character> Characters => _characters;
         private readonly List<Item> _items = [];
         public IReadOnlyCollection<Item> Items => _items;
-        //public List<Npc> Npcs { get; init; }
-        //public List<Enemy> Enemies { get; init; }
-
-        private Campaign (string name, string description)
+        private Campaign(
+            Guid id,
+            string name,
+            string description,
+            List<Character> characters,
+            List<Item> items
+        )
         {
-            Id = CampaignId.Create();
+            Id = CampaignId.Create(id);
             Name = CampaignName.Create(name);
             Description = CampaignDescription.Create(description);
+            _characters = characters;
+            _items = items;
         }
 
-        public static Campaign Create(string name, string description)
+        public static Campaign Create(
+            Guid id,
+            string name,
+            string description,
+            List<Character> characters,
+            List<Item> items
+        )
         {
-            return new Campaign (name, description);
+            return new Campaign(id, name, description, characters, items);
+        }
+
+        public static Campaign Reconstitute(
+            CampaignId id,
+            CampaignName name,
+            CampaignDescription description,
+            List<Character> characters,
+            List<Item> items
+        )
+        {
+            return new Campaign(
+                id.Value,
+                name.Value,
+                description.Value,
+                characters,
+                items
+            );
         }
     }
 }
