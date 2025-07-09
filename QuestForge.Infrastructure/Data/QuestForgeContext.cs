@@ -20,6 +20,10 @@ namespace QuestForge.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CharacterEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new SpeciesEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new SubSpeciesEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ClassEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new SubClassEntityConfiguration());
             base.OnModelCreating(modelBuilder);
 
             //modelBuilder.Entity<Campaign>()
@@ -55,38 +59,6 @@ namespace QuestForge.Infrastructure.Data
             //    .HasOne(item => item.Type)
             //    .WithMany(itemType => itemType.Items)
             //    .HasForeignKey(item => item.TypeId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //modelBuilder.Entity<Species>()
-            //    .HasKey(species => species.Id);
-            //modelBuilder.Entity<Species>()
-            //    .HasMany(species => species.SubSpecies)
-            //    .WithOne(subSpecies => subSpecies.Species)
-            //    .HasForeignKey(subSpecies => subSpecies.SpeciesId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //modelBuilder.Entity<Class>()
-            //    .HasKey(@class => @class.Id);
-            //modelBuilder.Entity<Class>()
-            //    .HasMany(@class => @class.SubClasses)
-            //    .WithOne(subClass => subClass.Class)
-            //    .HasForeignKey(subClass => subClass.ClassId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //modelBuilder.Entity<SubSpecies>()
-            //    .HasKey(subSpecies => subSpecies.Id);
-            //modelBuilder.Entity<SubSpecies>()
-            //    .HasOne(subSpecies => subSpecies.Species)
-            //    .WithMany(species => species.SubSpecies)
-            //    .HasForeignKey(subSpecies => subSpecies.SpeciesId)
-            //    .OnDelete(DeleteBehavior.Restrict);
-
-            //modelBuilder.Entity<SubClass>()
-            //    .HasKey(subClass => subClass.Id);
-            //modelBuilder.Entity<SubClass>()
-            //    .HasOne(subClass => subClass.Class)
-            //    .WithMany(@class => @class.SubClasses)
-            //    .HasForeignKey(subClass => subClass.ClassId)
             //    .OnDelete(DeleteBehavior.Restrict);
 
             //modelBuilder.Entity<ItemType>()
