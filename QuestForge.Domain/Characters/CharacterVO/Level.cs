@@ -1,6 +1,6 @@
 ﻿using QuestForge.Domain.Common.Exceptions;
 
-namespace QuestForge.Domain.ValueObjects.CharacterVO
+namespace QuestForge.Domain.Characters.CharacterVO
 {
     public sealed record Level
     {

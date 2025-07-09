@@ -1,7 +1,7 @@
-﻿using QuestForge.Domain.Campaigns;
+﻿using QuestForge.Domain.Campaigns.CampaignVO;
+using QuestForge.Domain.Characters.CharacterVO;
 using QuestForge.Domain.Items;
 using QuestForge.Domain.ValueObjects;
-using QuestForge.Domain.ValueObjects.CharacterVO;
 
 namespace QuestForge.Domain.Characters
 {
@@ -19,33 +19,61 @@ namespace QuestForge.Domain.Characters
         public CampaignId CampaignId { get; init; } = null!;
 
         private Character(
+            Guid id,
             string name,
             Species species,
             Class @class,
             int level,
             int hitPoints,
-            int armorClass
+            int armorClass,
+            List<Item> items
         )
         {
-            Id = CharacterId.Create();
+            Id = CharacterId.Create(id);
             Name = CharacterName.Create(name);
             Species = species;
             Class = @class;
             Level = Level.Create(level);
             HitPoints = HitPoints.Create(hitPoints);
             ArmorClass = ArmorClass.Create(armorClass);
+            _items = items;
         }
 
         public static Character Create(
+            Guid id,
             string name,
             Species species,
             Class @class,
             int level,
             int hitPoints,
-            int armorClass
+            int armorClass,
+            List<Item> items
         )
         {
-            return new Character(name, species, @class, level, hitPoints, armorClass);
+            return new Character(id, name, species, @class, level, hitPoints, armorClass, items);
+        }
+
+        public static Character Reconstitute(
+            CharacterId id,
+            CharacterName name,
+            Species species,
+            Class @class,
+            Level level,
+            HitPoints hitPoints,
+            ArmorClass armorClass,
+            List<Item> items
+        )
+        {
+            return new Character(
+                id.Value,
+                name.Value,
+                species,
+                @class,
+                level,
+                hitPoints,
+                armorClass,
+                items
+            );
         }
     }
 }

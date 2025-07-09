@@ -1,4 +1,4 @@
-﻿namespace QuestForge.Domain.Campaigns
+﻿namespace QuestForge.Domain.Campaigns.CampaignVO
 {
     public record CampaignId
     {

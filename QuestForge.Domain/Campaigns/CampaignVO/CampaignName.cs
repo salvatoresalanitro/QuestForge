@@ -1,6 +1,6 @@
 ﻿using QuestForge.Domain.Common.Exceptions;
 
-namespace QuestForge.Domain.ValueObjects.CampaignVO
+namespace QuestForge.Domain.Campaigns.CampaignVO
 {
     public sealed record CampaignName
     {

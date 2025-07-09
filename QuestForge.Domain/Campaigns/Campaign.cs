@@ -1,6 +1,6 @@
-﻿using QuestForge.Domain.Characters;
+﻿using QuestForge.Domain.Campaigns.CampaignVO;
+using QuestForge.Domain.Characters;
 using QuestForge.Domain.Items;
-using QuestForge.Domain.ValueObjects.CampaignVO;
 
 namespace QuestForge.Domain.Campaigns
 {
