@@ -13,15 +13,15 @@ namespace QuestForge.Infrastructure.Mapping
             );
         }
 
-        public static ItemTypeModel MapToModel(this ItemType itemType)
+        public static ItemTypeModel MapToModel(this ItemType domain)
         {
             var model = new ItemTypeModel()
             {
-                Id = itemType.Id,
-                Name = itemType.Name
+                Id = domain.Id,
+                Name = domain.Name
             };
 
-            model.Items.AddRange(itemType.Items.Select(i => i.MapToModel()));
+            model.Items.AddRange(domain.Items.Select(i => i.MapToModel()));
 
             return model;
         }
