@@ -16,14 +16,14 @@ namespace QuestForge.Infrastructure.Mapping
             );
         }
 
-        public static ItemModel MapToModel(this Item item)
+        public static ItemModel MapToModel(this Item domain)
         {
             return new ItemModel()
             {
-                Id = item.Id.Value,
-                Name = item.Name.Value,
-                Description = item.Description.Value,
-                Type = item.Type.MapToModel()
+                Id = domain.Id.Value,
+                Name = domain.Name.Value,
+                Description = domain.Description.Value,
+                Type = domain.Type.MapToModel()
             };
         }
     }
