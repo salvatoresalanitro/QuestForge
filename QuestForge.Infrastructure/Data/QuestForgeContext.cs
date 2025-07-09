@@ -19,6 +19,7 @@ namespace QuestForge.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new CampaignEntityConfiguration());
             modelBuilder.ApplyConfiguration(new CharacterEntityConfiguration());
             modelBuilder.ApplyConfiguration(new SpeciesEntityConfiguration());
             modelBuilder.ApplyConfiguration(new SubSpeciesEntityConfiguration());
@@ -28,33 +29,6 @@ namespace QuestForge.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new ItemEntityConfiguration());
 
             base.OnModelCreating(modelBuilder);
-
-            //modelBuilder.Entity<Campaign>()
-            //    .HasKey(campaign => campaign.Id);
-            //modelBuilder.Entity<Campaign>()
-            //    .HasMany(campaign => campaign.Characters)
-            //    .WithOne(character => character.Campaign)
-            //    .HasForeignKey(character => character.CampaignId);
-            //modelBuilder.Entity<Campaign>()
-            //    .HasMany(campaign => campaign.Items)
-            //    .WithOne(item => item.Campaign)
-            //    .HasForeignKey(item => item.CampaignId);
-            //modelBuilder.Entity<Campaign>()
-            //    .HasMany(campaign => campaign.Npcs)
-            //    .WithOne(npc => npc.Campaign)
-            //    .HasForeignKey(npc => npc.CampaignId);
-            //modelBuilder.Entity<Campaign>()
-            //    .HasMany(campaign => campaign.Enemies)
-            //    .WithOne(enemy => enemy.Campaign)
-            //    .HasForeignKey(enemy => enemy.CampaignId);
-
-            //modelBuilder.Entity<ItemType>()
-            //    .HasKey(itemType => itemType.Id);
-            //modelBuilder.Entity<ItemType>()
-            //    .HasMany(itemType => itemType.Items)
-            //    .WithOne(item => item.Type)
-            //    .HasForeignKey(item => item.TypeId)
-            //    .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ClassModel>().HasData(
                 new ClassModel() { Id = 1, Name = "Barbarian" },
