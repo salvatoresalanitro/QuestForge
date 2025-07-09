@@ -2,10 +2,10 @@
 {
     public class CampaignModel
     {
-        public Guid Id { get; }
-        public string Name { get; } = string.Empty;
-        public string Description { get; } = string.Empty;
-        public List<CharacterModel> Characters = [];
-        public List<ItemModel> Items = [];
+        public Guid Id { get; init; }
+        public string Name { get; init; } = string.Empty;
+        public string Description { get; init; } = string.Empty;
+        public List<CharacterModel> Characters { get; init; } = [];
+        public List<ItemModel> Items { get; init; } = [];
     }
 }
