@@ -12,6 +12,10 @@ namespace QuestForge.Infrastructure.Configurations
 
             builder.HasKey(c => c.Id);
 
+            builder.Property(c => c.Id)
+               .HasColumnName("Id")
+               .ValueGeneratedNever();
+
             builder.Property(c => c.Name)
                 .IsRequired();
 
