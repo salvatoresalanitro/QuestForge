@@ -2,16 +2,17 @@
 {
     public record CampaignId
     {
-        public Guid Id { get; init; }
+        public Guid Value { get; init; }
 
-        private CampaignId()
+        private CampaignId(Guid value)
         {
-            Id = Guid.NewGuid();
+            Value = value;
         }
 
         public static CampaignId Create()
-        {
-            return new CampaignId();
-        }
+            => Create(Guid.NewGuid());
+
+        public static CampaignId Create(Guid id)
+            => new CampaignId(id);
     }
 }
