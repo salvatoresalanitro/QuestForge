@@ -24,6 +24,9 @@ namespace QuestForge.Infrastructure.Data
             modelBuilder.ApplyConfiguration(new SubSpeciesEntityConfiguration());
             modelBuilder.ApplyConfiguration(new ClassEntityConfiguration());
             modelBuilder.ApplyConfiguration(new SubClassEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemTypeEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemEntityConfiguration());
+
             base.OnModelCreating(modelBuilder);
 
             //modelBuilder.Entity<Campaign>()
@@ -44,22 +47,6 @@ namespace QuestForge.Infrastructure.Data
             //    .HasMany(campaign => campaign.Enemies)
             //    .WithOne(enemy => enemy.Campaign)
             //    .HasForeignKey(enemy => enemy.CampaignId);
-
-            //modelBuilder.Entity<Item>()
-            //    .HasKey(item => item.Id);
-            //modelBuilder.Entity<Item>()
-            //    .HasOne(item => item.Campaign)
-            //    .WithMany(campaign => campaign.Items)
-            //    .HasForeignKey(item => item.CampaignId);
-            //modelBuilder.Entity<Item>()
-            //    .HasOne(item => item.OwnerCharacter)
-            //    .WithMany(character => character.Items)
-            //    .HasForeignKey(item => item.OwnerCharacterId);
-            //modelBuilder.Entity<Item>()
-            //    .HasOne(item => item.Type)
-            //    .WithMany(itemType => itemType.Items)
-            //    .HasForeignKey(item => item.TypeId)
-            //    .OnDelete(DeleteBehavior.Restrict);
 
             //modelBuilder.Entity<ItemType>()
             //    .HasKey(itemType => itemType.Id);
