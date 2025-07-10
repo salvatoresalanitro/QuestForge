@@ -1,38 +1,61 @@
-﻿using QuestForge.Core.Entities;
-using QuestForge.Core.Interfaces.RepositoryInterfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using QuestForge.Domain.Items;
+using QuestForge.Infrastructure.Data;
+using QuestForge.Infrastructure.Mapping;
 
 namespace QuestForge.Infrastructure.Repositories
 {
     public class ItemRepository : IItemRepository
     {
-        public Task<Item> CreateAsync(Item item)
+        private readonly QuestForgeContext _context;
+
+        public ItemRepository(QuestForgeContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteAsync(Guid itemId)
+        public async Task AddAsync(Item item)
         {
-            throw new NotImplementedException();
+            await _context.Items.AddAsync(item.MapToModel());
+
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Item>> GetAllAsync()
+        public async Task DeleteAsync(Item item)
         {
-            throw new NotImplementedException();
+            _context.Items.Remove(item.MapToModel());
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Item> GetByIdAsync(Guid itemId)
+        public async Task<IEnumerable<Item>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var items = await _context.Items.Select(i => i.MapToDomain()).ToListAsync();
+
+            return items;
         }
 
-        public Task<IEnumerable<Item>> GetByCampaignIdAsync(Guid campaignId)
+        public async Task<Item?> GetByIdAsync(Guid itemId)
         {
-            throw new NotImplementedException();
+            var item = await _context.Items.FirstOrDefaultAsync(i => i.Id == itemId);
+
+            return item?.MapToDomain();
         }
 
-        public Task<Item> UpdateAsync(Item item)
+        public async Task<IEnumerable<Item>> GetByCampaignIdAsync(Guid campaignId)
         {
-            throw new NotImplementedException();
+            var items = await _context.Items
+                .Where(i => i.Campaign != null && i.Campaign.Id == campaignId)
+                .Select(i => i.MapToDomain())
+                .ToListAsync();
+
+            return items;
+        }
+
+        public async Task UpdateAsync(Item item)
+        {
+            _context.Items.Update(item.MapToModel());
+
+            await _context.SaveChangesAsync();
         }
     }
 }

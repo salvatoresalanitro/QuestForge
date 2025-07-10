@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QuestForge.Core.Entities;
-using QuestForge.Core.Interfaces.RepositoryInterfaces;
+using QuestForge.Domain.Campaigns;
 using QuestForge.Infrastructure.Data;
+using QuestForge.Infrastructure.Mapping;
 
 namespace QuestForge.Infrastructure.Repositories
 {
@@ -16,19 +16,19 @@ namespace QuestForge.Infrastructure.Repositories
 
         public async Task AddAsync(Campaign campaign)
         {
-            await _context.Campaigns.AddAsync(campaign);
+            await _context.Campaigns.AddAsync(campaign.MapToModel());
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Campaign campaign)
         {
-            _context.Campaigns.Remove(campaign);
+            _context.Campaigns.Remove(campaign.MapToModel());
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Campaign>> GetAllAsync()
         {
-            var campaigns = await _context.Campaigns.ToListAsync();
+            var campaigns = await _context.Campaigns.Select(c => c.MapToDomain()).ToListAsync();
 
             return campaigns;
         }
@@ -36,12 +36,12 @@ namespace QuestForge.Infrastructure.Repositories
         public async Task<Campaign?> GetByIdAsync(Guid campaignId)
         {
             var campaign = await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaignId);
-            return campaign;
+            return campaign?.MapToDomain();
         }
 
         public async Task UpdateAsync(Campaign campaign)
         {
-            _context.Campaigns.Update(campaign);
+            _context.Campaigns.Update(campaign.MapToModel());
 
             await _context.SaveChangesAsync();
         }

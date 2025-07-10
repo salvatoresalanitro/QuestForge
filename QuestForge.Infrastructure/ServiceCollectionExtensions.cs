@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using QuestForge.Core.Interfaces.RepositoryInterfaces;
+using QuestForge.Domain.Campaigns;
+using QuestForge.Domain.Characters;
+using QuestForge.Domain.Items;
 using QuestForge.Infrastructure.Data;
 using QuestForge.Infrastructure.Repositories;
 
@@ -16,8 +18,7 @@ namespace QuestForge.Infrastructure
 
             service.AddScoped<ICampaignRepository, CampaignRepository>();
             service.AddScoped<ICharacterRepository, CharacterRepository>();
-            service.AddScoped<ISpeciesRepository, SpeciesRepository>();
-            service.AddScoped<IClassRepository, ClassRepository>();
+            service.AddScoped<IItemRepository, ItemRepository>();
 
             return service;
         }

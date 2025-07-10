@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using QuestForge.Core.Entities;
-using QuestForge.Core.Interfaces.RepositoryInterfaces;
+using QuestForge.Domain.Characters;
 using QuestForge.Infrastructure.Data;
+using QuestForge.Infrastructure.Mapping;
 
 namespace QuestForge.Infrastructure.Repositories
 {
@@ -15,13 +15,13 @@ namespace QuestForge.Infrastructure.Repositories
 
         public async Task AddAsync(Character character)
         {
-            await _context.Characters.AddAsync(character);
+            await _context.Characters.AddAsync(character.MapToModel());
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Character character)
         {
-            _context.Characters.Remove(character);
+            _context.Characters.Remove(character.MapToModel());
             await _context.SaveChangesAsync();
         }
 
@@ -29,12 +29,12 @@ namespace QuestForge.Infrastructure.Repositories
         {
             var hero = await _context.Characters.FirstOrDefaultAsync(character => character.Id == characterId);
 
-            return hero;
+            return hero?.MapToDomain();
         }
 
         public async Task UpdateAsync(Character character)
         {
-            _context.Characters.Update(character);
+            _context.Characters.Update(character.MapToModel());
 
             await _context.SaveChangesAsync();
         }
