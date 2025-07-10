@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuestForge.Core\QuestForge.Core.csproj" />
+    <ProjectReference Include="..\QuestForge.Domain\QuestForge.Domain.csproj" />
     <ProjectReference Include="..\QuestForge.DTOs\QuestForge.DTOs.csproj" />
   </ItemGroup>
 
