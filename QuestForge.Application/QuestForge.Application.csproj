@@ -11,4 +11,8 @@
     <ProjectReference Include="..\QuestForge.DTOs\QuestForge.DTOs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UsesCases\Campaigns\" />
+  </ItemGroup>
+
 </Project>
