@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36109.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestForge.Core", "QuestForge.Core\QuestForge.Core.csproj", "{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestForge.Infrastructure", "QuestForge.Infrastructure\QuestForge.Infrastructure.csproj", "{27836157-7DE5-4E8F-8316-6865A98D4AE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestForge.API", "QuestForge.API\QuestForge.API.csproj", "{4162E13A-9675-4FA2-B589-780C6F4DD0D0}"
@@ -27,18 +25,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Debug|x64.Build.0 = Debug|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Debug|x86.Build.0 = Debug|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Release|x64.ActiveCfg = Release|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Release|x64.Build.0 = Release|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Release|x86.ActiveCfg = Release|Any CPU
-		{A1717AAB-2E59-4D4C-A5DD-E05FF28FD2FA}.Release|x86.Build.0 = Release|Any CPU
 		{27836157-7DE5-4E8F-8316-6865A98D4AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27836157-7DE5-4E8F-8316-6865A98D4AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27836157-7DE5-4E8F-8316-6865A98D4AE2}.Debug|x64.ActiveCfg = Debug|Any CPU

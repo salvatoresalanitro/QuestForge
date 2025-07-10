@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuestForge.Application\QuestForge.Application.csproj" />
-    <ProjectReference Include="..\QuestForge.Core\QuestForge.Core.csproj" />
     <ProjectReference Include="..\QuestForge.DTOs\QuestForge.DTOs.csproj" />
   </ItemGroup>
 
