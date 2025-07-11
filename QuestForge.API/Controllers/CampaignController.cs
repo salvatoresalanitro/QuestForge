@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using QuestForge.Application.Interfaces;
-using QuestForge.Application.UsesCases.Campaigns.CreateCampaign;
+using QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign;
+using QuestForge.Application.UsesCases.Queries.Campaigns.GetCampaignById;
 using QuestForge.DTOs.DTOsCampaign;
 
 namespace QuestForge.API.Controllers
@@ -17,13 +17,16 @@ namespace QuestForge.API.Controllers
             _mediator = mediator;
         }
 
-        //[HttpGet("GetCampaign{id}")]
-        //public async Task<IActionResult> GetCampaignById(Guid id)
-        //{
-        //    var campaignDto = await _service.GetByIdAsync(id);
+        [HttpGet("GetCampaign{id}")]
+        public async Task<IActionResult> GetCampaignById(Guid id, CancellationToken cancellationToken)
+        {
+            //var campaignDto = await _service.GetByIdAsync(id);
+            var request = new GetCampaignByIdQuery(id);
 
-        //    return campaignDto is null ? NotFound() : Ok(campaignDto);
-        //}
+            var campaignDto = await _mediator.Send(request, cancellationToken);
+
+            return Ok(campaignDto);
+        }
 
         //[HttpGet("GetAllCampaigns")]
         //public async Task<IActionResult> GetAllCampaigns()
@@ -34,14 +37,13 @@ namespace QuestForge.API.Controllers
         //}
 
         [HttpPost("CreateCampaign")]
-        public async Task<IActionResult> CreateCampaign([FromBody] CreateCampaignDto dto)
+        public async Task<IActionResult> CreateCampaign([FromBody] CreateCampaignDto dto, CancellationToken cancellationToken)
         {
             var request = new CreateCampaignCommand(dto.Name, dto.Description ?? string.Empty);
 
-            await _mediator.Send(request);
-            //var campaignDto = await _service.CreateAsync(dto);
+            var id = await _mediator.Send(request, cancellationToken);
 
-            return CreatedAtAction(nameof(CreateCampaign), new { dto.Name }, null);
+            return CreatedAtAction(nameof(CreateCampaign), new { id }, new {Id = id});
         }
 
         //[HttpPut("UpdateCampaign")]
