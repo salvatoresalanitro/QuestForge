@@ -17,7 +17,7 @@ namespace QuestForge.Application.UsesCases.Queries.Campaigns.GetCampaignById
 
         public async Task<CampaignDto> Handle(GetCampaignByIdQuery request, CancellationToken cancellationToken)
         {
-            var campaign = await _campaignRepository.GetByIdAsync(request.Id);
+            var campaign = await _campaignRepository.GetByIdAsync(request.Id, cancellationToken);
 
             return campaign is null
                 ? throw new CampaignNotFoundException("Campaign not found.")
