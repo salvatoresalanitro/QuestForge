@@ -1,4 +1,4 @@
-﻿using QuestForge.Core.Entities;
+﻿using QuestForge.Domain.Items;
 using QuestForge.DTOs.DTOsItem;
 
 namespace QuestForge.Application.Mapping
@@ -9,9 +9,9 @@ namespace QuestForge.Application.Mapping
         {
             return new ItemDto
             {
-                Id = item.Id,
-                Name = item.Name,
-                Description = item.Description,
+                Id = item.Id.Value,
+                Name = item.Name.Value,
+                Description = item.Description.Value,
                 TypeId = item.Type.Id,
                 TypeName = item.Type.Name
             };

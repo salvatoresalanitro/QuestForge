@@ -1,4 +1,4 @@
-﻿using QuestForge.Core.Entities;
+﻿using QuestForge.Domain.Characters;
 using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.Application.Mapping
@@ -9,8 +9,8 @@ namespace QuestForge.Application.Mapping
         {
             return new CharacterDto
             {
-                Id = character.Id,
-                Name = character.Name,
+                Id = character.Id.Value,
+                Name = character.Name.Value,
                 SpeciesId = character.Species.Id,
                 ClassId = character.Class.Id,
                 SpeciesName = character.Species.Name,
@@ -22,9 +22,9 @@ namespace QuestForge.Application.Mapping
             };
         }
 
-        public static Character ToEntity(CreateCharacterDto dto, Species species, Class @class)
+        public static Character ToEntity(CreateCharacterDto dto)
         {
-            return Character.Create(dto.Name, species, @class, dto.Level, dto.HitPoints, dto.ArmorClass);
+            return Character.Create(dto.Name, dto.species, dto.@class, dto.Level, dto.HitPoints, dto.ArmorClass);
         }
     }
 }

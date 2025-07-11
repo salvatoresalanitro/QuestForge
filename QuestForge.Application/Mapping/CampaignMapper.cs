@@ -1,4 +1,4 @@
-﻿using QuestForge.Core.Entities;
+﻿using QuestForge.Domain.Campaigns;
 using QuestForge.DTOs.DTOsCampaign;
 
 namespace QuestForge.Application.Mapping
@@ -9,13 +9,11 @@ namespace QuestForge.Application.Mapping
         {
             return new CampaignDto
             {
-                Id = campaign.Id,
-                Name = campaign.Name,
-                Description = campaign.Description,
-                Characters = campaign.Characters,
-                Enemies = campaign.Enemies,
-                Items = campaign.Items,
-                Npcs = campaign.Npcs
+                Id = campaign.Id.Value,
+                Name = campaign.Name.Value,
+                Description = campaign.Description.Value,
+                Characters = campaign.Characters.Select(CharacterMapper.ToDto).ToList(),
+                Items = campaign.Items.Select(ItemMapper.ToDto).ToList(),
             };
         }
 
