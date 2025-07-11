@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuestForge.Core\QuestForge.Core.csproj" />
+    <ProjectReference Include="..\QuestForge.Domain\QuestForge.Domain.csproj" />
   </ItemGroup>
 
 </Project>

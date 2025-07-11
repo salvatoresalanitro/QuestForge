@@ -1,4 +1,5 @@
-﻿using QuestForge.Core.Entities;
+﻿using QuestForge.DTOs.DTOsCharacter;
+using QuestForge.DTOs.DTOsItem;
 
 namespace QuestForge.DTOs.DTOsCampaign
 {
@@ -7,9 +8,7 @@ namespace QuestForge.DTOs.DTOsCampaign
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
-        public List<Character>? Characters { get; set; }
-        public List<Item>? Items { get; set; }
-        public List<Npc>? Npcs { get; set; }
-        public List<Enemy>? Enemies { get; set; }
+        public List<CharacterDto>? Characters { get; set; }
+        public List<ItemDto>? Items { get; set; }
     }
 }
