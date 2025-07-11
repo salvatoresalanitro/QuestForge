@@ -11,58 +11,66 @@ using QuestForge.Infrastructure.Data;
 namespace QuestForge.Infrastructure.Migrations
 {
     [DbContext(typeof(QuestForgeContext))]
-    [Migration("20250702083040_AddItemType_SubSpecies_SubClass")]
-    partial class AddItemType_SubSpecies_SubClass
+    [Migration("20250710104947_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "9.0.6");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Campaign", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.CampaignModel", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Campaigns");
+                    b.ToTable("Campaign", (string)null);
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Character", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.CharacterModel", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Id");
 
                     b.Property<int>("ArmorClass")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("ArmorClass");
 
-                    b.Property<Guid>("CampaignId")
+                    b.Property<Guid?>("CampaignId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("ClassId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("HitPoints")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("HitPoints");
 
                     b.Property<int>("Level")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Level");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(25)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
                     b.Property<int>("SpeciesId")
                         .HasColumnType("INTEGER");
@@ -75,22 +83,23 @@ namespace QuestForge.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("Characters");
+                    b.ToTable("Characters", (string)null);
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Class", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.ClassModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Class", (string)null);
 
                     b.HasData(
                         new
@@ -155,83 +164,58 @@ namespace QuestForge.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Enemy", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.ItemModel", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Id");
+
+                    b.Property<Guid?>("CampaignId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CampaignId")
+                    b.Property<Guid?>("CharacterId")
                         .HasColumnType("TEXT");
-
-                    b.Property<double>("ChallengeRating")
-                        .HasColumnType("REAL");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("TypeId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("TypeId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CampaignId");
 
-                    b.ToTable("Enemies");
+                    b.HasIndex("CharacterId");
+
+                    b.HasIndex("TypeId");
+
+                    b.ToTable("Item", (string)null);
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Item", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("CampaignId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("ItemTypeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("OwnerCharacterId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CampaignId");
-
-                    b.HasIndex("ItemTypeId");
-
-                    b.HasIndex("OwnerCharacterId");
-
-                    b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("QuestForge.Core.Entities.ItemType", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.ItemTypeModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ItemTypes");
+                    b.ToTable("ItemType", (string)null);
 
                     b.HasData(
                         new
@@ -271,46 +255,20 @@ namespace QuestForge.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Npc", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("CampaignId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CampaignId");
-
-                    b.ToTable("Npcs");
-                });
-
-            modelBuilder.Entity("QuestForge.Core.Entities.Species", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.SpeciesModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Species");
+                    b.ToTable("Species", (string)null);
 
                     b.HasData(
                         new
@@ -365,24 +323,25 @@ namespace QuestForge.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.SubClass", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.SubClassModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Id");
 
                     b.Property<int>("ClassId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClassId");
 
-                    b.ToTable("SubSubClasses");
+                    b.ToTable("SubClass", (string)null);
 
                     b.HasData(
                         new
@@ -527,7 +486,7 @@ namespace QuestForge.Infrastructure.Migrations
                         {
                             Id = 24,
                             ClassId = 6,
-                            Name = "Warrior of the Open Hand"
+                            Name = "Warrior of of the Open Hand"
                         },
                         new
                         {
@@ -659,7 +618,7 @@ namespace QuestForge.Infrastructure.Migrations
                         {
                             Id = 46,
                             ClassId = 11,
-                            Name = "Hexblade"
+                            Name = "Hexblade Patron"
                         },
                         new
                         {
@@ -687,15 +646,16 @@ namespace QuestForge.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.SubSpecies", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.SubSpeciesModel", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("Id");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("Name");
 
                     b.Property<int>("SpeciesId")
                         .HasColumnType("INTEGER");
@@ -704,7 +664,7 @@ namespace QuestForge.Infrastructure.Migrations
 
                     b.HasIndex("SpeciesId");
 
-                    b.ToTable("SubSpecies");
+                    b.ToTable("SubSpecies", (string)null);
 
                     b.HasData(
                         new
@@ -836,44 +796,37 @@ namespace QuestForge.Infrastructure.Migrations
                         new
                         {
                             Id = 22,
-                            Name = "Cloud Giant",
-                            SpeciesId = 6
-                        },
-                        new
-                        {
-                            Id = 23,
                             Name = "Abissal",
                             SpeciesId = 10
                         },
                         new
                         {
-                            Id = 24,
-                            Name = "Chthonic",
+                            Id = 23,
+                            Name = "Chtonic",
                             SpeciesId = 10
                         },
                         new
                         {
-                            Id = 25,
+                            Id = 24,
                             Name = "Infernal",
                             SpeciesId = 10
                         });
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Character", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.CharacterModel", b =>
                 {
-                    b.HasOne("QuestForge.Core.Entities.Campaign", "Campaign")
+                    b.HasOne("QuestForge.Infrastructure.Models.CampaignModel", "Campaign")
                         .WithMany("Characters")
                         .HasForeignKey("CampaignId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("QuestForge.Core.Entities.Class", "Class")
+                    b.HasOne("QuestForge.Infrastructure.Models.ClassModel", "Class")
                         .WithMany()
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("QuestForge.Core.Entities.Species", "Species")
+                    b.HasOne("QuestForge.Infrastructure.Models.SpeciesModel", "Species")
                         .WithMany()
                         .HasForeignKey("SpeciesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -886,58 +839,34 @@ namespace QuestForge.Infrastructure.Migrations
                     b.Navigation("Species");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Enemy", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.ItemModel", b =>
                 {
-                    b.HasOne("QuestForge.Core.Entities.Campaign", "Campaign")
-                        .WithMany("Enemies")
-                        .HasForeignKey("CampaignId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Campaign");
-                });
-
-            modelBuilder.Entity("QuestForge.Core.Entities.Item", b =>
-                {
-                    b.HasOne("QuestForge.Core.Entities.Campaign", "Campaign")
+                    b.HasOne("QuestForge.Infrastructure.Models.CampaignModel", "Campaign")
                         .WithMany("Items")
                         .HasForeignKey("CampaignId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("QuestForge.Core.Entities.ItemType", "ItemType")
+                    b.HasOne("QuestForge.Infrastructure.Models.CharacterModel", "Character")
                         .WithMany("Items")
-                        .HasForeignKey("ItemTypeId")
+                        .HasForeignKey("CharacterId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("QuestForge.Infrastructure.Models.ItemTypeModel", "Type")
+                        .WithMany("Items")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("QuestForge.Core.Entities.Character", "OwnerCharacter")
-                        .WithMany("Items")
-                        .HasForeignKey("OwnerCharacterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Campaign");
 
-                    b.Navigation("ItemType");
+                    b.Navigation("Character");
 
-                    b.Navigation("OwnerCharacter");
+                    b.Navigation("Type");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Npc", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.SubClassModel", b =>
                 {
-                    b.HasOne("QuestForge.Core.Entities.Campaign", "Campaign")
-                        .WithMany("Npcs")
-                        .HasForeignKey("CampaignId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Campaign");
-                });
-
-            modelBuilder.Entity("QuestForge.Core.Entities.SubClass", b =>
-                {
-                    b.HasOne("QuestForge.Core.Entities.Class", "Class")
+                    b.HasOne("QuestForge.Infrastructure.Models.ClassModel", "Class")
                         .WithMany("SubClasses")
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -946,10 +875,10 @@ namespace QuestForge.Infrastructure.Migrations
                     b.Navigation("Class");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.SubSpecies", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.SubSpeciesModel", b =>
                 {
-                    b.HasOne("QuestForge.Core.Entities.Species", "Species")
-                        .WithMany("SubSpecies")
+                    b.HasOne("QuestForge.Infrastructure.Models.SpeciesModel", "Species")
+                        .WithMany("AllSubSpecies")
                         .HasForeignKey("SpeciesId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -957,35 +886,31 @@ namespace QuestForge.Infrastructure.Migrations
                     b.Navigation("Species");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Campaign", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.CampaignModel", b =>
                 {
                     b.Navigation("Characters");
 
-                    b.Navigation("Enemies");
-
                     b.Navigation("Items");
-
-                    b.Navigation("Npcs");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Character", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.CharacterModel", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Class", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.ClassModel", b =>
                 {
                     b.Navigation("SubClasses");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.ItemType", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.ItemTypeModel", b =>
                 {
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("QuestForge.Core.Entities.Species", b =>
+            modelBuilder.Entity("QuestForge.Infrastructure.Models.SpeciesModel", b =>
                 {
-                    b.Navigation("SubSpecies");
+                    b.Navigation("AllSubSpecies");
                 });
 #pragma warning restore 612, 618
         }
