@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace QuestForge.Application.UsesCases.Campaigns.CreateCampaign
+namespace QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign
 {
     public sealed record CreateCampaignCommand : IRequest<Guid>
     {

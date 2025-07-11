@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using QuestForge.Domain.Campaigns;
 
-namespace QuestForge.Application.UsesCases.Campaigns.CreateCampaign
+namespace QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign
 {
     public sealed class CreateCampaignCommandHandler : IRequestHandler<CreateCampaignCommand, Guid>
     {
