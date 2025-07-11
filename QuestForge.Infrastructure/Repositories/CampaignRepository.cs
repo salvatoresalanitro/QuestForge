@@ -26,16 +26,16 @@ namespace QuestForge.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Campaign>> GetAllAsync()
+        public async Task<IEnumerable<Campaign>> GetAllAsync(CancellationToken cancellationToken)
         {
-            var campaigns = await _context.Campaigns.Select(c => c.MapToDomain()).ToListAsync();
+            var campaigns = await _context.Campaigns.Select(c => c.MapToDomain()).ToListAsync(cancellationToken);
 
             return campaigns;
         }
 
-        public async Task<Campaign?> GetByIdAsync(Guid campaignId)
+        public async Task<Campaign?> GetByIdAsync(Guid campaignId, CancellationToken cancellationToken)
         {
-            var campaign = await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaignId);
+            var campaign = await _context.Campaigns.FirstOrDefaultAsync(c => c.Id == campaignId, cancellationToken);
             return campaign?.MapToDomain();
         }
 
