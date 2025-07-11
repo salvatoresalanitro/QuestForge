@@ -1,5 +1,5 @@
 using QuestForge.API.Middleware;
-using QuestForge.Application.UsesCases.Campaigns.CreateCampaign;
+using QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign;
 using QuestForge.Infrastructure;
 
 internal class Program
