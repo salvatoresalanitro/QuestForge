@@ -2,8 +2,15 @@
 
 namespace QuestForge.Application.UsesCases.Campaigns.CreateCampaign
 {
-    public record CreateCampaignCommand : IRequest
+    public sealed record CreateCampaignCommand : IRequest
     {
+        public string Name { get; } = string.Empty;
+        public string Description { get; } = string.Empty;
 
+        public CreateCampaignCommand(string name, string description)
+        {
+            Name  = name;
+            Description = description;
+        }
     }
 }
