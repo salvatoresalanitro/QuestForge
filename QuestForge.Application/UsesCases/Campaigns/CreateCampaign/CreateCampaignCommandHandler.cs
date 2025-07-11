@@ -3,7 +3,7 @@ using QuestForge.Domain.Campaigns;
 
 namespace QuestForge.Application.UsesCases.Campaigns.CreateCampaign
 {
-    public sealed class CreateCampaignCommandHandler : IRequestHandler<CreateCampaignCommand>
+    public sealed class CreateCampaignCommandHandler : IRequestHandler<CreateCampaignCommand, Guid>
     {
         private readonly ICampaignRepository _repository;
 
@@ -12,7 +12,7 @@ namespace QuestForge.Application.UsesCases.Campaigns.CreateCampaign
             _repository = repository;
         }
 
-        public async Task Handle(CreateCampaignCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateCampaignCommand request, CancellationToken cancellationToken)
         {
             var toBeCreated = Campaign.Create(
                 request.Name,
@@ -20,6 +20,8 @@ namespace QuestForge.Application.UsesCases.Campaigns.CreateCampaign
             );
 
             await _repository.CreateAsync(toBeCreated, cancellationToken);
+
+            return toBeCreated.Id.Value;
         }
     }
 }
