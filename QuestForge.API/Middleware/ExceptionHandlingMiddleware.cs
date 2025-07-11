@@ -1,6 +1,6 @@
 ﻿using System.Net;
-using System.Text.Json;
-using QuestForge.Core.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using QuestForge.Domain.Common.Exceptions;
 
 namespace QuestForge.API.Middleware
 {
@@ -19,9 +19,9 @@ namespace QuestForge.API.Middleware
             {
                 await _next(context);
             }
-            catch (NotFoundException ex)
+            catch (DomainException  ex)
             {
-                await HandleExceptionAsync(context, HttpStatusCode.NotFound, ex.Message);
+                await HandleExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message);
             }
             catch (Exception ex)
             {
@@ -35,23 +35,15 @@ namespace QuestForge.API.Middleware
             context.Response.StatusCode = (int)statusCode;
             context.Response.ContentType = "application/json";
 
-            var response = new ErrorResponse((int)statusCode, message, detail);
-
-            return context.Response.WriteAsync(JsonSerializer.Serialize(response));
-        }
-
-        private class ErrorResponse
-        {
-            public int StatusCode { get; }
-            public string Error { get; } = string.Empty;
-            public string? Detail { get; }
-
-            public ErrorResponse(int statusCode, string error, string? detail = null)
+            var problem = new ProblemDetails
             {
-                StatusCode = statusCode;
-                Error = error;
-                Detail = detail;
-            }
+                Title = $"Invalid request: {message}",
+                Status = (int)statusCode,
+                Detail = detail,
+                Instance = context.Request.Path
+            };
+
+            return context.Response.WriteAsJsonAsync(problem);
         }
     }
 }
