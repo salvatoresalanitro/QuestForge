@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign;
+using QuestForge.Application.UsesCases.Queries.Campaigns.GetAllCampaigns;
 using QuestForge.Application.UsesCases.Queries.Campaigns.GetCampaignById;
 using QuestForge.DTOs.DTOsCampaign;
 
@@ -28,13 +29,15 @@ namespace QuestForge.API.Controllers
             return Ok(campaignDto);
         }
 
-        //[HttpGet("GetAllCampaigns")]
-        //public async Task<IActionResult> GetAllCampaigns()
-        //{
-        //    var campaignsDtos = await _service.GetAllAsync();
+        [HttpGet("GetAllCampaigns")]
+        public async Task<IActionResult> GetAllCampaigns()
+        {
+            var request = new GetAllCampaignsQuery();
 
-        //    return campaignsDtos is null ? NotFound() : Ok(campaignsDtos);
-        //}
+            var campaignsDtos = await _mediator.Send(request);
+
+            return Ok(campaignsDtos);
+        }
 
         [HttpPost("CreateCampaign")]
         public async Task<IActionResult> CreateCampaign([FromBody] CreateCampaignDto dto, CancellationToken cancellationToken)
