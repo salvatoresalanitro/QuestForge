@@ -14,10 +14,10 @@ namespace QuestForge.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(Campaign campaign)
+        public async Task CreateAsync(Campaign campaign, CancellationToken cancellationToken)
         {
-            await _context.Campaigns.AddAsync(campaign.MapToModel());
-            await _context.SaveChangesAsync();
+            await _context.Campaigns.AddAsync(campaign.MapToModel(), cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task DeleteAsync(Campaign campaign)

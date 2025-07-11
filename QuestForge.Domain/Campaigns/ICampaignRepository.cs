@@ -4,7 +4,7 @@
     {
         Task<Campaign?> GetByIdAsync(Guid campaignId);
         Task<IEnumerable<Campaign>> GetAllAsync();
-        Task AddAsync(Campaign campaign);
+        Task CreateAsync(Campaign campaign, CancellationToken cancellationToken);
         Task UpdateAsync(Campaign campaign);
         Task DeleteAsync(Campaign campaign);
     }
