@@ -14,14 +14,14 @@ namespace QuestForge.Application.UsesCases.Campaigns.CreateCampaign
 
         public async Task<Guid> Handle(CreateCampaignCommand request, CancellationToken cancellationToken)
         {
-            var toBeCreated = Campaign.Create(
+            var campaign = Campaign.Create(
                 request.Name,
                 request.Description
             );
 
-            await _repository.CreateAsync(toBeCreated, cancellationToken);
+            await _repository.CreateAsync(campaign, cancellationToken);
 
-            return toBeCreated.Id.Value;
+            return campaign.Id.Value;
         }
     }
 }
