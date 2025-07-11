@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using QuestForge.Application.Exceptions;
 using QuestForge.Domain.Common.Exceptions;
 
 namespace QuestForge.API.Middleware
@@ -22,6 +23,10 @@ namespace QuestForge.API.Middleware
             catch (DomainException  ex)
             {
                 await HandleExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message);
+            }
+            catch (CampaignNotFoundException ex)
+            {
+                await HandleExceptionAsync(context, HttpStatusCode.NotFound, ex.Message);
             }
             catch (Exception ex)
             {
