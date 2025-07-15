@@ -20,7 +20,7 @@ namespace QuestForge.API.Middleware
             {
                 await _next(context);
             }
-            catch (DomainException  ex)
+            catch (DomainException ex)
             {
                 await HandleExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message);
             }

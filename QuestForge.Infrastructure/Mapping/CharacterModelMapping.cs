@@ -8,6 +8,17 @@ namespace QuestForge.Infrastructure.Mapping
     {
         public static Character MapToDomain(this CharacterModel model)
         {
+            return Character.Create(
+                model.Id,
+                model.Name,
+                model.Species.MapToDomain(),
+                model.Class.MapToDomain(),
+                model.Level,
+                model.HitPoints,
+                model.ArmorClass,
+                model.Items.Select(i => i.MapToDomain()).ToList()
+            );
+
             return Character.Reconstitute(
                 CharacterId.Create(model.Id),
                 CharacterName.Create(model.Name),
