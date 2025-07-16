@@ -46,22 +46,5 @@ namespace QuestForge.Domain.Campaigns
         {
             return new Campaign(CampaignId.Create().Value, name, description, [], []);
         }
-
-        public static Campaign Reconstitute(
-            CampaignId id,
-            CampaignName name,
-            CampaignDescription description,
-            List<Character> characters,
-            List<Item> items
-        )
-        {
-            return new Campaign(
-                id.Value,
-                name.Value,
-                description.Value,
-                characters,
-                items
-            );
-        }
     }
 }

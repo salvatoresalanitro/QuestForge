@@ -1,5 +1,4 @@
 ﻿using QuestForge.Domain.Campaigns;
-using QuestForge.Domain.Campaigns.CampaignVO;
 using QuestForge.Infrastructure.Models;
 
 namespace QuestForge.Infrastructure.Mapping
@@ -8,12 +7,12 @@ namespace QuestForge.Infrastructure.Mapping
     {
         public static Campaign MapToDomain(this CampaignModel model)
         {
-            return Campaign.Reconstitute(
-                CampaignId.Create(model.Id),
-                CampaignName.Create(model.Name),
-                CampaignDescription.Create(model.Description),
+            return Campaign.Create(
+                model.Id,
+                model.Name,
+                model.Description,
                 model.Characters.Select(c => c.MapToDomain()).ToList(),
-                model.Items.Select(i => i.MapToDomain()).ToList()
+                model.Items.Select(c => c.MapToDomain()).ToList()
             );
         }
 
