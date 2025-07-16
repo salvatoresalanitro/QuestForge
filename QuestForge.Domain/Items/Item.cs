@@ -36,15 +36,5 @@ namespace QuestForge.Domain.Items
         {
             return new Item(id, name, description, type);
         }
-
-        public static Item Reconstitute(
-            ItemId id,
-            ItemName name,
-            ItemDescription description,
-            ItemType type
-        )
-        {
-            return new Item(id.Value, name.Value, description.Value, type);
-        }
     }
 }

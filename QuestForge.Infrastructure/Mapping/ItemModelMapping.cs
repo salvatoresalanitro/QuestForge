@@ -1,5 +1,4 @@
 ﻿using QuestForge.Domain.Items;
-using QuestForge.Domain.Items.ItemVO;
 using QuestForge.Infrastructure.Models;
 
 namespace QuestForge.Infrastructure.Mapping
@@ -8,10 +7,10 @@ namespace QuestForge.Infrastructure.Mapping
     {
         public static Item MapToDomain(this ItemModel model)
         {
-            return Item.Reconstitute(
-                ItemId.Create(model.Id),
-                ItemName.Create(model.Name),
-                ItemDescription.Create(model.Description),
+            return Item.Create(
+                model.Id,
+                model.Name,
+                model.Description,
                 model.Type.MapToDomain()
             );
         }
