@@ -1,5 +1,4 @@
 ﻿using QuestForge.Domain.Characters;
-using QuestForge.Domain.Characters.CharacterVO;
 using QuestForge.Infrastructure.Models;
 
 namespace QuestForge.Infrastructure.Mapping
@@ -16,17 +15,6 @@ namespace QuestForge.Infrastructure.Mapping
                 model.Level,
                 model.HitPoints,
                 model.ArmorClass,
-                model.Items.Select(i => i.MapToDomain()).ToList()
-            );
-
-            return Character.Reconstitute(
-                CharacterId.Create(model.Id),
-                CharacterName.Create(model.Name),
-                model.Species.MapToDomain(),
-                model.Class.MapToDomain(),
-                Level.Create(model.Level),
-                HitPoints.Create(model.HitPoints),
-                ArmorClass.Create(model.ArmorClass),
                 model.Items.Select(i => i.MapToDomain()).ToList()
             );
         }

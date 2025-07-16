@@ -52,28 +52,5 @@ namespace QuestForge.Domain.Characters
         {
             return new Character(id, name, species, @class, level, hitPoints, armorClass, items);
         }
-
-        public static Character Reconstitute(
-            CharacterId id,
-            CharacterName name,
-            Species species,
-            Class @class,
-            Level level,
-            HitPoints hitPoints,
-            ArmorClass armorClass,
-            List<Item> items
-        )
-        {
-            return new Character(
-                id.Value,
-                name.Value,
-                species,
-                @class,
-                level,
-                hitPoints,
-                armorClass,
-                items
-            );
-        }
     }
 }
