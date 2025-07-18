@@ -6,9 +6,9 @@ namespace QuestForge.Domain.Campaigns
 {
     public class Campaign
     {
-        public CampaignId Id { get; }
-        public CampaignName Name { get; }
-        public CampaignDescription Description { get; }
+        public CampaignId Id { get; private set; }
+        public CampaignName Name { get; private set; }
+        public CampaignDescription Description { get; private set; }
         private readonly List<Character> _characters = [];
         public IReadOnlyCollection<Character> Characters => _characters;
         private readonly List<Item> _items = [];
@@ -45,6 +45,12 @@ namespace QuestForge.Domain.Campaigns
         )
         {
             return new Campaign(CampaignId.Create().Value, name, description, [], []);
+        }
+
+        public void Update(string name, string description)
+        {
+            Name.Update(name);
+            Description.Update(description);
         }
     }
 }
