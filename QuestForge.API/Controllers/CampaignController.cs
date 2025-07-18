@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign;
+using QuestForge.Application.UsesCases.Commands.Campaigns.DeleteCampaign;
 using QuestForge.Application.UsesCases.Commands.Campaigns.UpdateCampaign;
 using QuestForge.Application.UsesCases.Queries.Campaigns.GetAllCampaigns;
 using QuestForge.Application.UsesCases.Queries.Campaigns.GetCampaignById;
@@ -63,7 +64,6 @@ namespace QuestForge.API.Controllers
         [HttpDelete("DeleteCampaign{id}")]
         public async Task<IActionResult> DeleteCampaign(Guid id, CancellationToken cancellationToken)
         {
-            //var success = await _service.DeleteAsync(id);
             var request = new DeleteCampaignCommand(id);
 
             var success = await _mediator.Send(request, cancellationToken);
