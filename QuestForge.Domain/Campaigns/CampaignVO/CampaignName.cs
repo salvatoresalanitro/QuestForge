@@ -4,7 +4,7 @@ namespace QuestForge.Domain.Campaigns.CampaignVO
 {
     public sealed record CampaignName
     {
-        public string Value { get; }
+        public string Value { get; private set; }
 
         private CampaignName(string value)
         {
@@ -28,7 +28,12 @@ namespace QuestForge.Domain.Campaigns.CampaignVO
 
         public static CampaignName Create(string value)
         {
-            return new CampaignName(value);
+            return new CampaignName(value.Trim());
+        }
+
+        public void Update(string value)
+        {
+            Value = value;
         }
 
         public override string ToString() => Value;
