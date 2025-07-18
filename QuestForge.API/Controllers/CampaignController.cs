@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign;
+using QuestForge.Application.UsesCases.Commands.Campaigns.UpdateCampaign;
 using QuestForge.Application.UsesCases.Queries.Campaigns.GetAllCampaigns;
 using QuestForge.Application.UsesCases.Queries.Campaigns.GetCampaignById;
 using QuestForge.DTOs.DTOsCampaign;
@@ -49,20 +50,25 @@ namespace QuestForge.API.Controllers
             return CreatedAtAction(nameof(CreateCampaign), new { id }, new {Id = id});
         }
 
-        //[HttpPut("UpdateCampaign")]
-        //public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] CreateCampaignDto dto)
-        //{
-        //    var updatedCampaign = await _service.UpdateAsync(id, dto);
+        [HttpPut("UpdateCampaign")]
+        public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] CreateCampaignDto dto, CancellationToken cancellationToken)
+        {
+            var request = new UpdateCampaignCommand(id, dto.Name, dto.Description ?? string.Empty);
 
-        //    return updatedCampaign is null ? NotFound() : Ok(updatedCampaign);
-        //}
+            var campaignDto = await _mediator.Send(request, cancellationToken);
 
-        //[HttpDelete("DeleteCampaign{id}")]
-        //public async Task<IActionResult> DeleteCampaign(Guid id)
-        //{
-        //    var success = await _service.DeleteAsync(id);
+            return Ok(campaignDto);
+        }
 
-        //    return success ? NoContent() : NotFound();
-        //}
+        [HttpDelete("DeleteCampaign{id}")]
+        public async Task<IActionResult> DeleteCampaign(Guid id, CancellationToken cancellationToken)
+        {
+            //var success = await _service.DeleteAsync(id);
+            var request = new DeleteCampaignCommand(id);
+
+            var success = await _mediator.Send(request, cancellationToken);
+
+            return success ? NoContent() : NotFound();
+        }
     }
 }
