@@ -6,6 +6,6 @@
         Task<IEnumerable<Campaign>> GetAllAsync(CancellationToken cancellationToken);
         Task CreateAsync(Campaign campaign, CancellationToken cancellationToken);
         Task UpdateAsync(Campaign campaign, CancellationToken cancellationToken);
-        Task DeleteAsync(Campaign campaign);
+        Task DeleteAsync(Campaign campaign, CancellationToken cancellationToken);
     }
 }

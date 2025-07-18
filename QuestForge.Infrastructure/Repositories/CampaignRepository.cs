@@ -21,10 +21,13 @@ namespace QuestForge.Infrastructure.Repositories
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task DeleteAsync(Campaign campaign)
+        public async Task DeleteAsync(Campaign campaign, CancellationToken cancellationToken)
         {
-            _context.Campaigns.Remove(campaign.MapToModel());
-            await _context.SaveChangesAsync();
+            var modelTracked = _context.ChangeTracker.Entries<CampaignModel>()
+                .First(model => model.Entity.Id == campaign.Id.Value).Entity;
+
+            _context.Campaigns.Remove(modelTracked);
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<Campaign>> GetAllAsync(CancellationToken cancellationToken)
