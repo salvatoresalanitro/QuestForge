@@ -23,7 +23,6 @@ namespace QuestForge.API.Controllers
         [HttpGet("GetCampaign{id}")]
         public async Task<IActionResult> GetCampaignById(Guid id, CancellationToken cancellationToken)
         {
-            //var campaignDto = await _service.GetByIdAsync(id);
             var request = new GetCampaignByIdQuery(id);
 
             var campaignDto = await _mediator.Send(request, cancellationToken);
