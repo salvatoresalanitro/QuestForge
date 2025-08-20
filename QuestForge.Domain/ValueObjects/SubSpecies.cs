@@ -4,18 +4,16 @@
     {
         public int Id { get; init; }
         public string Name { get; init; } = string.Empty;
-        public Species Species {  get; init; }
 
-        private SubSpecies(int id, string name, Species species)
+        private SubSpecies(int id, string name)
         {
             Id = id;
             Name = name;
-            Species = species;
         }
 
-        public static SubSpecies Create(int id, string name, Species species)
+        public static SubSpecies Create(int id, string name)
         {
-            return new SubSpecies(id, name, species);
+            return new SubSpecies(id, name);
         }
     }
 }

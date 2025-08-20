@@ -4,18 +4,16 @@
     {
         public int Id { get; init; }
         public string Name { get; init; } = string.Empty;
-        public Class Class { get; init; }
 
-        private SubClass(int id, string name, Class @class)
+        private SubClass(int id, string name)
         {
             Id = id;
             Name = name;
-            Class = @class;
         }
 
-        public static SubClass Create(int id, string name, Class @class)
+        public static SubClass Create(int id, string name)
         {
-            return new SubClass(id, name, @class);
+            return new SubClass(id, name);
         }
     }
 }

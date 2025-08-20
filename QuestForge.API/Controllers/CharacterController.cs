@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using QuestForge.Application.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using QuestForge.Application.UsesCases.Commands.Characters.CreateCharacter;
 using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.API.Controllers
@@ -8,12 +9,12 @@ namespace QuestForge.API.Controllers
     [Route("api/[controller]")]
     public class CharacterController : ControllerBase
     {
-        //private readonly ICharacterService _service;
+        private readonly IMediator _mediator;
 
-        //public CharacterController(ICharacterService characterService)
-        //{
-        //    _service = characterService;
-        //}
+        public CharacterController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         //[HttpGet("GetCharacter{id}")]
         //public async Task<IActionResult> GetCharacterById(Guid id)
@@ -23,13 +24,22 @@ namespace QuestForge.API.Controllers
         //    return characterDto is null ? NotFound() : Ok(characterDto);
         //}
 
-        //[HttpPost("CreateCharacter")]
-        //public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto)
-        //{
-        //    var characterDto = await _service.CreateAsync(dto);
+        [HttpPost("CreateCharacter")]
+        public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto, CancellationToken cancellationToken)
+        {
+            var request = new CreateCharacterCommand(
+                dto.Name,
+                dto.SpeciesId,
+                dto.ClassId,
+                dto.Level,
+                dto.HitPoints,
+                dto.ArmorClass
+            );
 
-        //    return CreatedAtAction(nameof(GetCharacterById), new { id = characterDto.Id }, characterDto);
-        //}
+            var id = await _mediator.Send(request, cancellationToken);
+
+            return CreatedAtAction(nameof(CreateCharacter), new { id }, new { Id = id });
+        }
 
         //[HttpPut("UpdateCharacter")]
         //public async Task<IActionResult> UpdateCharacter(Guid id, [FromBody] CreateCharacterDto dto)

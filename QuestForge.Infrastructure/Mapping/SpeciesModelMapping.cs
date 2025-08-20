@@ -8,7 +8,7 @@ namespace QuestForge.Infrastructure.Mapping
         public static Species MapToDomain(this SpeciesModel model)
         {
             var allSubSpecies = model.AllSubSpecies
-                .Select(sM => SubSpecies.Create(sM.Id, sM.Name, sM.Species.MapToDomain()))
+                .Select(sM => SubSpecies.Create(sM.Id, sM.Name))
                 .ToList();
 
             return Species.Create(
@@ -27,7 +27,7 @@ namespace QuestForge.Infrastructure.Mapping
             };
 
             model.AllSubSpecies.AddRange(
-                domain.AllSubSpecies.Select(s => s.MapToModel())
+                domain.AllSubSpecies.Select(ss => ss.MapToModel())
             );
 
             return model;

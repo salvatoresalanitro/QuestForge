@@ -25,8 +25,8 @@ namespace QuestForge.Infrastructure.Mapping
             {
                 Id = domain.Id.Value,
                 Name = domain.Name.Value,
-                Species = domain.Species.MapToModel(),
-                Class = domain.Class.MapToModel(),
+                SpeciesId = domain.Species.Id,
+                ClassId = domain.Class.Id,
                 Level = domain.Level.Value,
                 HitPoints = domain.HitPoints.Value,
                 ArmorClass = domain.ArmorClass.Value,

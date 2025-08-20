@@ -1,4 +1,5 @@
 ﻿using QuestForge.Domain.Items;
+using QuestForge.Domain.ValueObjects;
 using QuestForge.DTOs.DTOsItem;
 
 namespace QuestForge.Application.Mapping
@@ -15,6 +16,16 @@ namespace QuestForge.Application.Mapping
                 TypeId = item.Type.Id,
                 TypeName = item.Type.Name
             };
+        }
+
+        public static Item ToEntity(ItemDto dto)
+        {
+            return Item.Create(
+                dto.Id,
+                dto.Name,
+                dto.Description,
+                ItemType.Create(dto.TypeId, dto.TypeName)
+            );
         }
     }
 }

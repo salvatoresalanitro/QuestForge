@@ -9,8 +9,7 @@ namespace QuestForge.Infrastructure.Mapping
         {
             return SubSpecies.Create(
                 model.Id,
-                model.Name,
-                model.Species.MapToDomain()
+                model.Name
             );
         }
 
@@ -19,8 +18,7 @@ namespace QuestForge.Infrastructure.Mapping
             return new SubSpeciesModel()
             {
                 Id = domain.Id,
-                Name = domain.Name,
-                Species = domain.Species.MapToModel()
+                Name = domain.Name
             };
         }
     }

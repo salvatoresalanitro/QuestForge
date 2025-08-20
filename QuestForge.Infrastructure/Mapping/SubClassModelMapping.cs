@@ -9,8 +9,7 @@ namespace QuestForge.Infrastructure.Mapping
         {
             return SubClass.Create(
                 model.Id,
-                model.Name,
-                model.Class.MapToDomain()
+                model.Name
             );
         }
 
@@ -20,7 +19,6 @@ namespace QuestForge.Infrastructure.Mapping
             {
                 Id = domain.Id,
                 Name = domain.Name,
-                Class = domain.Class.MapToModel(),
             };
         }
     }

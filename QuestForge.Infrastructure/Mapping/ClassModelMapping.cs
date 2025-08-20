@@ -8,7 +8,7 @@ namespace QuestForge.Infrastructure.Mapping
         public static Class MapToDomain(this ClassModel model)
         {
             var subClasses = model.SubClasses
-                .Select(scM => SubClass.Create(scM.Id, scM.Name, scM.Class.MapToDomain()))
+                .Select(scM => SubClass.Create(scM.Id, scM.Name))
                 .ToList();
 
             return Class.Create(
@@ -27,7 +27,7 @@ namespace QuestForge.Infrastructure.Mapping
             };
 
             model.SubClasses.AddRange(
-                domain.SubClasses.Select(c => c.MapToModel())
+                domain.SubClasses.Select(sc => sc.MapToModel())
             );
 
             return model;

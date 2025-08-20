@@ -13,10 +13,10 @@ namespace QuestForge.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(Character character)
+        public async Task CreateAsync(Character character, CancellationToken cancellationToken)
         {
-            await _context.Characters.AddAsync(character.MapToModel());
-            await _context.SaveChangesAsync();
+            await _context.Characters.AddAsync(character.MapToModel(), cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task DeleteAsync(Character character)

@@ -52,5 +52,27 @@ namespace QuestForge.Domain.Characters
         {
             return new Character(id, name, species, @class, level, hitPoints, armorClass, items);
         }
+
+        public static Character Create(
+            string name,
+            Species species,
+            Class @class,
+            int level,
+            int hitPoints,
+            int armorClass,
+            List<Item> items
+        )
+        {
+            return new Character(
+                CharacterId.Create().Value,
+                name,
+                species,
+                @class,
+                level,
+                hitPoints,
+                armorClass,
+                items
+            );
+        }
     }
 }

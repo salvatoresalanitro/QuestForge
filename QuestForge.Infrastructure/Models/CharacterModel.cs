@@ -8,6 +8,8 @@
         public int HitPoints { get; init; }
         public int ArmorClass { get; init; }
         public SpeciesModel Species { get; init; } = null!;
+        public int SpeciesId { get; init; }
+        public int ClassId { get; init; }
         public ClassModel Class { get; init; } = null!;
         public List<ItemModel> Items { get; init; } = [];
         public CampaignModel? Campaign { get; init; }
