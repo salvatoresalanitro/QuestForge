@@ -29,7 +29,9 @@ namespace QuestForge.Infrastructure.Repositories
         {
             var characters = await _context.Characters
                 .Include(c => c.Species)
+                    .ThenInclude(s => s.AllSubSpecies)
                 .Include(c => c.Class)
+                    .ThenInclude(c => c.SubClasses)
                 .Include(c => c.Items)
                 .Select(c => c.MapToDomain())
                 .ToListAsync(cancellationToken);
@@ -37,9 +39,15 @@ namespace QuestForge.Infrastructure.Repositories
             return characters;
         }
 
-        public async Task<Character?> GetByIdAsync(Guid characterId)
+        public async Task<Character?> GetByIdAsync(Guid characterId, CancellationToken cancellationToken)
         {
-            var hero = await _context.Characters.FirstOrDefaultAsync(character => character.Id == characterId);
+            var hero = await _context.Characters
+                .Include(c => c.Species)
+                    .ThenInclude(s => s.AllSubSpecies)
+                .Include(c => c.Class)
+                    .ThenInclude(c => c.SubClasses)
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(character => character.Id == characterId, cancellationToken);
 
             return hero?.MapToDomain();
         }
