@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QuestForge.Application.UsesCases.Commands.Characters.CreateCharacter;
 using QuestForge.Application.UsesCases.Queries.Characters.GetAllCharacters;
+using QuestForge.Application.UsesCases.Queries.Characters.GetCharacterById;
 using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.API.Controllers
@@ -17,13 +18,15 @@ namespace QuestForge.API.Controllers
             _mediator = mediator;
         }
 
-        //[HttpGet("GetCharacter{id}")]
-        //public async Task<IActionResult> GetCharacterById(Guid id)
-        //{
-        //    var characterDto = await _service.GetByIdAsync(id);
+        [HttpGet("GetCharacter{id}")]
+        public async Task<IActionResult> GetCharacterById(Guid id, CancellationToken cancellationToken)
+        {
+            var request = new GetCharacterByIdQuery(id);
 
-        //    return characterDto is null ? NotFound() : Ok(characterDto);
-        //}
+            var characterDto = await _mediator.Send(request, cancellationToken);
+
+            return Ok(characterDto);
+        }
 
         [HttpGet("GetAllCharacters")]
         public async Task<IActionResult> GetAllCharacters()
