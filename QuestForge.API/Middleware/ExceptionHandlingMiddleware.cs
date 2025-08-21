@@ -24,7 +24,7 @@ namespace QuestForge.API.Middleware
             {
                 await HandleExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message);
             }
-            catch (CampaignNotFoundException ex)
+            catch (AppException ex)
             {
                 await HandleExceptionAsync(context, HttpStatusCode.NotFound, ex.Message);
             }
