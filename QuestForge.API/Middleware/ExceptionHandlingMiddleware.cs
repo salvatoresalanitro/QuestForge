@@ -31,7 +31,7 @@ namespace QuestForge.API.Middleware
             catch (Exception ex)
             {
                 // Logging in the future
-                await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, $"An unexpected error occurred, {ex.Message}");
+                await HandleExceptionAsync(context, HttpStatusCode.InternalServerError, $"An unexpected error occurred, {ex.Message}", ex.InnerException?.Message);
             }
         }
 
