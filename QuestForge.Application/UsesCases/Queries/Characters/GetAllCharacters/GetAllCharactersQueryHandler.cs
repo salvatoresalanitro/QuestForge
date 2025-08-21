@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using QuestForge.Application.Exceptions;
 using QuestForge.Application.Mapping;
 using QuestForge.Domain.Characters;
 using QuestForge.DTOs.DTOsCharacter;
@@ -19,7 +20,7 @@ namespace QuestForge.Application.UsesCases.Queries.Characters.GetAllCharacters
             var characters = await _characterRepository.GetAllAsync(cancellationToken);
 
             return characters is null
-                ? throw new Exception("No characters found.")
+                ? throw new CharacterNotFoundException("No characters found.")
                 : characters.Select(c => CharacterMapper.ToDto(c));
         }
     }
