@@ -1,11 +1,11 @@
 ﻿namespace QuestForge.Application.Exceptions
 {
-    public class CampaignNotFoundException : ApplicationException
+    internal class CampaignNotFoundException : AppException
     {
-        public CampaignNotFoundException() { }
+        internal CampaignNotFoundException() { }
 
-        public CampaignNotFoundException(string message) : base(message) { }
+        internal CampaignNotFoundException(string message) : base(message) { }
 
-        public CampaignNotFoundException(string message, Exception innerException) : base(message, innerException) { }
+        internal CampaignNotFoundException(string message, Exception innerException) : base(message, innerException) { }
     }
 }
