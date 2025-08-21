@@ -25,6 +25,18 @@ namespace QuestForge.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<Character>> GetAllAsync(CancellationToken cancellationToken)
+        {
+            var characters = await _context.Characters
+                .Include(c => c.Species)
+                .Include(c => c.Class)
+                .Include(c => c.Items)
+                .Select(c => c.MapToDomain())
+                .ToListAsync(cancellationToken);
+
+            return characters;
+        }
+
         public async Task<Character?> GetByIdAsync(Guid characterId)
         {
             var hero = await _context.Characters.FirstOrDefaultAsync(character => character.Id == characterId);
