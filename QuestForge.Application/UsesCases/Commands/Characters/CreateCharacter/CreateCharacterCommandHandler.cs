@@ -1,4 +1,5 @@
 using MediatR;
+using QuestForge.Application.Exceptions;
 using QuestForge.Domain.Characters;
 using QuestForge.Domain.ValueObjects;
 
@@ -22,9 +23,14 @@ namespace QuestForge.Application.UsesCases.Commands.Characters.CreateCharacter
             var species = await _speciesRepository.GetByIdAsync(request.SpeciesId);
             var @class = await _classRepository.GetByIdAsync(request.ClassId);
 
-            if(species is null || @class is null )
+            if(species is null)
             {
-                throw new Exception("Species or class are not found"); //put a correct new exception species/class not found??
+                throw new SpeciesNotFoundException("Species not found.");
+            }
+
+            if(@class is null)
+            {
+                throw new ClassNotFoundException("Class not found.");
             }
 
             var character = Character.Create(
