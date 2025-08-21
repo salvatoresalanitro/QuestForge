@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuestForge.Application.UsesCases.Commands.Characters.CreateCharacter;
+using QuestForge.Application.UsesCases.Queries.Characters.GetAllCharacters;
 using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.API.Controllers
@@ -23,6 +24,16 @@ namespace QuestForge.API.Controllers
 
         //    return characterDto is null ? NotFound() : Ok(characterDto);
         //}
+
+        [HttpGet("GetAllCharacters")]
+        public async Task<IActionResult> GetAllCharacters()
+        {
+            var request = new GetAllCharactersQuery();
+
+            var charactersDtos = await _mediator.Send(request);
+
+            return Ok(charactersDtos);
+        }
 
         [HttpPost("CreateCharacter")]
         public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto, CancellationToken cancellationToken)
