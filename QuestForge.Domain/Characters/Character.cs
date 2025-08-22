@@ -74,5 +74,15 @@ namespace QuestForge.Domain.Characters
                 items
             );
         }
+
+        public void Update(string name, int speciesId, int classId, int level, int hitPoints, int armorClass)
+        {
+            Name.Update(name);
+            Species.Update(speciesId);
+            Class.Update(classId);
+            Level.Update(level);
+            HitPoints.Update(hitPoints);
+            ArmorClass.Update(armorClass);
+        }
     }
 }
