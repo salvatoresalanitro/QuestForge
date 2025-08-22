@@ -3,7 +3,7 @@ using QuestForge.Domain.Campaigns;
 
 namespace QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign
 {
-    public sealed class CreateCampaignCommandHandler : IRequestHandler<CreateCampaignCommand, Guid>
+    public sealed record CreateCampaignCommandHandler : IRequestHandler<CreateCampaignCommand, Guid>
     {
         private readonly ICampaignRepository _repository;
 

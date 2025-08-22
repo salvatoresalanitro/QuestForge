@@ -5,7 +5,7 @@ using QuestForge.Domain.ValueObjects;
 
 namespace QuestForge.Application.UsesCases.Commands.Characters.CreateCharacter
 {
-    public class CreateCharacterCommandHandler : IRequestHandler<CreateCharacterCommand, Guid>
+    public sealed record CreateCharacterCommandHandler : IRequestHandler<CreateCharacterCommand, Guid>
     {
         private readonly ISpeciesRepository _speciesRepository;
         private readonly IClassRepository _classRepository;

@@ -6,7 +6,7 @@ using QuestForge.DTOs.DTOsCampaign;
 
 namespace QuestForge.Application.UsesCases.Queries.Campaigns.GetCampaignById
 {
-    public class GetCampaignByIdQueryHandler : IRequestHandler<GetCampaignByIdQuery, CampaignDto>
+    public sealed record GetCampaignByIdQueryHandler : IRequestHandler<GetCampaignByIdQuery, CampaignDto>
     {
         private readonly ICampaignRepository _campaignRepository;
 

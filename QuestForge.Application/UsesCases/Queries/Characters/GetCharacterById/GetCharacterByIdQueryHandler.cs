@@ -6,7 +6,7 @@ using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.Application.UsesCases.Queries.Characters.GetCharacterById
 {
-    public class GetCharacterByIdQueryHandler : IRequestHandler<GetCharacterByIdQuery, CharacterDto>
+    public sealed record GetCharacterByIdQueryHandler : IRequestHandler<GetCharacterByIdQuery, CharacterDto>
     {
         private readonly ICharacterRepository _characterRepository;
 
