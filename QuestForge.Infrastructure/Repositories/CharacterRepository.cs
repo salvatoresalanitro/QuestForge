@@ -22,7 +22,10 @@ namespace QuestForge.Infrastructure.Repositories
 
         public async Task DeleteAsync(Character character, CancellationToken cancellationToken)
         {
-            _context.Characters.Remove(character.MapToModel());
+            var modelTracked = _context.ChangeTracker.Entries<CharacterModel>()
+                .First(model => model.Entity.Id == character.Id.Value).Entity;
+
+            _context.Characters.Remove(modelTracked);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
