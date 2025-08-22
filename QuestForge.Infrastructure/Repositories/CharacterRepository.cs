@@ -2,6 +2,7 @@
 using QuestForge.Domain.Characters;
 using QuestForge.Infrastructure.Data;
 using QuestForge.Infrastructure.Mapping;
+using QuestForge.Infrastructure.Models;
 
 namespace QuestForge.Infrastructure.Repositories
 {
@@ -19,10 +20,10 @@ namespace QuestForge.Infrastructure.Repositories
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task DeleteAsync(Character character)
+        public async Task DeleteAsync(Character character, CancellationToken cancellationToken)
         {
             _context.Characters.Remove(character.MapToModel());
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<Character>> GetAllAsync(CancellationToken cancellationToken)
@@ -52,11 +53,27 @@ namespace QuestForge.Infrastructure.Repositories
             return hero?.MapToDomain();
         }
 
-        public async Task UpdateAsync(Character character)
+        public async Task UpdateAsync(Character character, CancellationToken cancellationToken)
         {
-            _context.Characters.Update(character.MapToModel());
+            var modelTracked = _context.ChangeTracker.Entries<CharacterModel>()
+                .First(model => model.Entity.Id == character.Id.Value).Entity;
+            UpdateModelTracked(character, modelTracked);
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        private static void UpdateModelTracked(Character character, CharacterModel modelTracked)
+        {
+            modelTracked.Name = character.Name.Value;
+            modelTracked.Level = character.Level.Value;
+            modelTracked.HitPoints = character.HitPoints.Value;
+            modelTracked.ArmorClass = character.ArmorClass.Value;
+            modelTracked.SpeciesId = character.Species.Id;
+            modelTracked.ClassId = character.Class.Id;
+
+            modelTracked.Items.Clear();
+
+            modelTracked.Items.AddRange(character.Items.Select(i => i.MapToModel()));
         }
     }
 }
