@@ -4,7 +4,7 @@ namespace QuestForge.Domain.Characters.CharacterVO
 {
     public record ArmorClass
     {
-        public int Value { get; }
+        public int Value { get; private set; }
 
         private ArmorClass(int value)
         {
@@ -19,6 +19,11 @@ namespace QuestForge.Domain.Characters.CharacterVO
         public static ArmorClass Create(int value)
         {
             return new ArmorClass(value);
+        }
+
+        public void Update(int value)
+        {
+            Value = value;
         }
 
         public static implicit operator int(ArmorClass armorClass) => armorClass.Value;

@@ -4,7 +4,7 @@ namespace QuestForge.Domain.Characters.CharacterVO
 {
     public sealed record CharacterName
     {
-        public string Value { get; }
+        public string Value { get; private set; }
 
         private CharacterName(string value)
         {
@@ -29,6 +29,11 @@ namespace QuestForge.Domain.Characters.CharacterVO
         public static CharacterName Create(string value)
         {
             return new CharacterName(value);
+        }
+
+        public void Update(string value)
+        {
+            Value = value;
         }
 
         public override string ToString() => Value;

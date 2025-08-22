@@ -4,7 +4,7 @@ namespace QuestForge.Domain.Characters.CharacterVO
 {
     public sealed record Level
     {
-        public int Value { get; }
+        public int Value { get; private set; }
         private Level(int value)
         {
             if(value < 1)
@@ -23,6 +23,11 @@ namespace QuestForge.Domain.Characters.CharacterVO
         public static Level Create(int value)
         {
             return new Level(value);
+        }
+
+        public void Update(int value)
+        {
+            Value = value;
         }
 
         public static implicit operator int(Level level) => level.Value;

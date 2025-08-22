@@ -2,7 +2,7 @@
 {
     public sealed record Class
     {
-        public int Id { get; init; }
+        public int Id { get; private set; }
         public string Name { get; init; } = string.Empty;
         public List<SubClass> SubClasses { get; init; } = [];
 
@@ -16,6 +16,11 @@
         public static Class Create(int id, string name, List<SubClass> subClasses)
         {
             return new Class(id, name, subClasses);
+        }
+
+        public void Update(int id)
+        {
+            Id = id;
         }
     }
 }

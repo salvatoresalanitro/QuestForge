@@ -4,7 +4,7 @@ namespace QuestForge.Domain.Characters.CharacterVO
 {
     public sealed record HitPoints
     {
-        public int Value { get; }
+        public int Value { get; private set; }
 
         private HitPoints(int value)
         {
@@ -19,6 +19,11 @@ namespace QuestForge.Domain.Characters.CharacterVO
         public static HitPoints Create(int value)
         {
             return new HitPoints(value);
+        }
+
+        public void Update(int value)
+        {
+            Value = value;
         }
 
         public static implicit operator int(HitPoints hitPoints) => hitPoints.Value;
