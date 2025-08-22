@@ -18,18 +18,18 @@ namespace QuestForge.Tests.Application.CampaignTests
             Assert.NotNull(campaign.Items);
         }
 
-        //[Fact]
-        //public void Update_should_update_name_and_description()
-        //{
-        //    // Arrange
-        //    var campaign = Campaign.Create("Ombre di Arcanath", "Campagna di Salvo");
+        [Fact]
+        public void Update_should_update_name_and_description()
+        {
+            // Arrange
+            var campaign = Campaign.Create("Ombre di Arcanath", "Campagna di Salvo");
 
-        //    // Act
-        //    campaign.Update("New name", "New description");
+            // Act
+            campaign.Update("New name", "New description");
 
-        //    // Assert
-        //    Assert.Equal("New name", campaign.Name);
-        //    Assert.Equal("New description", campaign.Description);
-        //}
+            // Assert
+            Assert.Equal("New name", campaign.Name.Value);
+            Assert.Equal("New description", campaign.Description.Value);
+        }
     }
 }
