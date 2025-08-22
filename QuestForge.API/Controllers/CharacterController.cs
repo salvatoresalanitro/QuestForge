@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using QuestForge.Application.UsesCases.Commands.Characters.CreateCharacter;
+using QuestForge.Application.UsesCases.Commands.Characters.DeleteCharacter;
 using QuestForge.Application.UsesCases.Commands.Characters.UpdateCharacter;
 using QuestForge.Application.UsesCases.Queries.Characters.GetAllCharacters;
 using QuestForge.Application.UsesCases.Queries.Characters.GetCharacterById;
@@ -66,12 +67,14 @@ namespace QuestForge.API.Controllers
             return Ok(characterDto);
         }
 
-        //[HttpDelete("DeleteCharacter")]
-        //public async Task<IActionResult> DeleteCharacter(Guid id)
-        //{
-        //    var success = await _service.DeleteAsync(id);
+        [HttpDelete("DeleteCharacter{id}")]
+        public async Task<IActionResult> DeleteCharacter(Guid id, CancellationToken cancellationToken)
+        {
+            var request = new DeleteCharacterCommand(id);
 
-        //    return success ? NoContent() : NotFound();
-        //}
+            var success = await _mediator.Send(request, cancellationToken);
+
+            return success ? NoContent() : NotFound();
+        }
     }
 }
