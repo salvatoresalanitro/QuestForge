@@ -33,7 +33,22 @@ namespace QuestForge.Domain.Characters.CharacterVO
 
         public void Update(string value)
         {
-            Value = value;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new CharacterUpdateException("Name cannot be empty");
+            }
+
+            if (value.Length < 3)
+            {
+                throw new CharacterUpdateException("Name cannot be less than 3 character");
+            }
+
+            if (value.Length > 25)
+            {
+                throw new CharacterUpdateException("Name cannot exceed 25 characters");
+            }
+
+            Value = value.Trim();
         }
 
         public override string ToString() => Value;
