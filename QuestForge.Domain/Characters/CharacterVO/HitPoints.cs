@@ -23,6 +23,11 @@ namespace QuestForge.Domain.Characters.CharacterVO
 
         public void Update(int value)
         {
+            if (value < 0)
+            {
+                throw new CharacterUpdateException("HitPoints cannot be negative.");
+            }
+
             Value = value;
         }
 

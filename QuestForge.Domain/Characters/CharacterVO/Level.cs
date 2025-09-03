@@ -27,6 +27,16 @@ namespace QuestForge.Domain.Characters.CharacterVO
 
         public void Update(int value)
         {
+            if (value < 1)
+            {
+                throw new CharacterUpdateException("Level must be at least 1.");
+            }
+
+            if (value > 20)
+            {
+                throw new CharacterUpdateException("Level cannot exceed 20.");
+            }
+
             Value = value;
         }
 
