@@ -18,7 +18,6 @@ namespace QuestForge.Tests.Application.CharacterTests
         [InlineData(" ")]
         public void Create_should_throw_exception_if_value_provided_is_empty_or_white_space(string value)
         {
-            Assert.Throws<CharacterCreationException>(() => CharacterName.Create(value));
             var exception = Assert.Throws<CharacterCreationException>(() => CharacterName.Create(value));
             Assert.Equal("Name cannot be empty", exception.Message);
         }
