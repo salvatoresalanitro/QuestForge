@@ -10,17 +10,17 @@ namespace QuestForge.Domain.Campaigns.CampaignVO
         {
             if(string.IsNullOrWhiteSpace(value))
             {
-                throw new CampaignCreationException("Name cannot be empty.");
+                throw new CampaignCreationException("Name cannot be empty");
             }
 
             if(value.Length < 5)
             {
-                throw new CampaignCreationException("Name cannot be less than 5 characters.");
+                throw new CampaignCreationException("Name cannot be less than 5 characters");
             }
 
             if(value.Length > 100)
             {
-                throw new CampaignCreationException("Name cannot exceed 100 characters.");
+                throw new CampaignCreationException("Name cannot exceed 100 characters");
             }
 
             Value = value.Trim();
@@ -28,12 +28,27 @@ namespace QuestForge.Domain.Campaigns.CampaignVO
 
         public static CampaignName Create(string value)
         {
-            return new CampaignName(value.Trim());
+            return new CampaignName(value);
         }
 
         public void Update(string value)
         {
-            Value = value;
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new CampaignUpdateException("Name cannot be empty");
+            }
+
+            if (value.Length < 5)
+            {
+                throw new CampaignUpdateException("Name cannot be less than 5 characters");
+            }
+
+            if (value.Length > 100)
+            {
+                throw new CampaignUpdateException("Name cannot exceed 100 characters");
+            }
+
+            Value = value.Trim();
         }
 
         public override string ToString() => Value;
