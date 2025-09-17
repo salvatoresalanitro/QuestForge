@@ -5,7 +5,7 @@ namespace QuestForge.Tests.Application.CharacterTests
     public class CharacterIdTest
     {
         [Fact]
-        public void Should_be_not_empty_when_is_created()
+        public void Should_not_be_empty_when_is_created()
         {
             var id = CharacterId.Create();
 
