@@ -1,4 +1,4 @@
-﻿using QuestForge.Core.Entities;
+﻿using QuestForge.Domain.Campaigns;
 
 namespace QuestForge.Tests.Application.TestUtils.Builders
 {

@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using QuestForge.Core.Entities;
-using QuestForge.Core.Interfaces.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
+using QuestForge.Domain.ValueObjects;
 using QuestForge.Infrastructure.Data;
+using QuestForge.Infrastructure.Mapping;
 
 namespace QuestForge.Infrastructure.Repositories
 {
@@ -13,16 +13,25 @@ namespace QuestForge.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<Species?> GetByIdAsync(int id)
+
+        public async Task<IEnumerable<Species>> GetAllAsync()
         {
-            var species = await _context.AllSpecies.FirstOrDefaultAsync();
+            var species = await _context.AllSpecies
+                .Include(s => s.AllSubSpecies)
+                .Select(s => s.MapToDomain())
+                .ToListAsync();
 
             return species;
         }
 
-        public async Task<IEnumerable<Species>> GetAllAsync()
+        public async Task<Species?> GetByIdAsync(int id)
         {
-            return await _context.AllSpecies.ToListAsync();
+            var entity = await _context.AllSpecies
+                .AsNoTracking()
+                .Include(s => s.AllSubSpecies)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            return entity?.MapToDomain();
         }
     }
 }

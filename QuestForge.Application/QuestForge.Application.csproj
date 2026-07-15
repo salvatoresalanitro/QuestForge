@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuestForge.Core\QuestForge.Core.csproj" />
+    <PackageReference Include="MediatR" Version="13.0.0" />
+    <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QuestForge.Domain\QuestForge.Domain.csproj" />
     <ProjectReference Include="..\QuestForge.DTOs\QuestForge.DTOs.csproj" />
   </ItemGroup>
 

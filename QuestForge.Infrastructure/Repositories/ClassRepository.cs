@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using QuestForge.Core.Entities;
-using QuestForge.Core.Interfaces.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
+using QuestForge.Domain.ValueObjects;
 using QuestForge.Infrastructure.Data;
+using QuestForge.Infrastructure.Mapping;
 
 namespace QuestForge.Infrastructure.Repositories
 {
@@ -14,16 +14,24 @@ namespace QuestForge.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Class?> GetByIdAsync(int id)
+        public async Task<IEnumerable<Class>> GetAllAsync()
         {
-            var classes = await _context.Classes.FirstOrDefaultAsync();
+            var classes = await _context.Classes
+                .Include(c => c.SubClasses)
+                .Select(c => c.MapToDomain())
+                .ToListAsync();
 
             return classes;
         }
 
-        public async Task<IEnumerable<Class>> GetAllAsync()
+        public async Task<Class?> GetByIdAsync(int id)
         {
-            return await _context.Classes.ToListAsync();
+            var entity = await _context.Classes
+                .AsNoTracking()
+                .Include(c => c.SubClasses)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return entity?.MapToDomain();
         }
     }
 }

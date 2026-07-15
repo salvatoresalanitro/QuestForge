@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using QuestForge.Application.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using QuestForge.Application.UsesCases.Commands.Characters.CreateCharacter;
+using QuestForge.Application.UsesCases.Commands.Characters.DeleteCharacter;
+using QuestForge.Application.UsesCases.Commands.Characters.UpdateCharacter;
+using QuestForge.Application.UsesCases.Queries.Characters.GetAllCharacters;
+using QuestForge.Application.UsesCases.Queries.Characters.GetCharacterById;
 using QuestForge.DTOs.DTOsCharacter;
 
 namespace QuestForge.API.Controllers
@@ -8,41 +13,66 @@ namespace QuestForge.API.Controllers
     [Route("api/[controller]")]
     public class CharacterController : ControllerBase
     {
-        private readonly ICharacterService _service;
+        private readonly IMediator _mediator;
 
-        public CharacterController(ICharacterService characterService)
+        public CharacterController(IMediator mediator)
         {
-            _service = characterService;
+            _mediator = mediator;
         }
 
         [HttpGet("GetCharacter{id}")]
-        public async Task<IActionResult> GetCharacterById(Guid id)
+        public async Task<IActionResult> GetCharacterById(Guid id, CancellationToken cancellationToken)
         {
-            var characterDto = await _service.GetByIdAsync(id);
+            var request = new GetCharacterByIdQuery(id);
 
-            return characterDto is null ? NotFound() : Ok(characterDto);
+            var characterDto = await _mediator.Send(request, cancellationToken);
+
+            return Ok(characterDto);
+        }
+
+        [HttpGet("GetAllCharacters")]
+        public async Task<IActionResult> GetAllCharacters()
+        {
+            var request = new GetAllCharactersQuery();
+
+            var charactersDtos = await _mediator.Send(request);
+
+            return Ok(charactersDtos);
         }
 
         [HttpPost("CreateCharacter")]
-        public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto)
+        public async Task<IActionResult> CreateCharacter([FromBody] CreateCharacterDto dto, CancellationToken cancellationToken)
         {
-            var characterDto = await _service.CreateAsync(dto);
+            var request = new CreateCharacterCommand(
+                dto.Name,
+                dto.SpeciesId,
+                dto.ClassId,
+                dto.Level,
+                dto.HitPoints,
+                dto.ArmorClass
+            );
 
-            return CreatedAtAction(nameof(GetCharacterById), new { id = characterDto.Id }, characterDto);
+            var id = await _mediator.Send(request, cancellationToken);
+
+            return CreatedAtAction(nameof(CreateCharacter), new { id }, new { Id = id });
         }
 
         [HttpPut("UpdateCharacter")]
-        public async Task<IActionResult> UpdateCharacter(Guid id, [FromBody] CreateCharacterDto dto)
+        public async Task<IActionResult> UpdateCharacter(Guid id, [FromBody] CreateCharacterDto dto, CancellationToken cancellationToken)
         {
-            var updatedCharacter = await _service.UpdateAsync(id, dto);
+            var request = new UpdateCharacterCommand(id, dto);
 
-            return updatedCharacter is null ? NotFound() : Ok(updatedCharacter);
+            var characterDto = await _mediator.Send(request, cancellationToken);
+
+            return Ok(characterDto);
         }
 
-        [HttpDelete("DeleteCharacter")]
-        public async Task<IActionResult> DeleteCharacter(Guid id)
+        [HttpDelete("DeleteCharacter{id}")]
+        public async Task<IActionResult> DeleteCharacter(Guid id, CancellationToken cancellationToken)
         {
-            var success = await _service.DeleteAsync(id);
+            var request = new DeleteCharacterCommand(id);
+
+            var success = await _mediator.Send(request, cancellationToken);
 
             return success ? NoContent() : NotFound();
         }

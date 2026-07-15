@@ -1,4 +1,5 @@
-﻿using QuestForge.Core.Entities;
+﻿using QuestForge.Domain.Characters;
+using QuestForge.Domain.ValueObjects;
 using QuestForge.Tests.Application.TestUtils.Seeds;
 
 namespace QuestForge.Tests.Application.CharacterTests
@@ -9,15 +10,15 @@ namespace QuestForge.Tests.Application.CharacterTests
         public void Create_should_initialize_character_correctly()
         {
             // Arrange
-            var species = Species.Create(8, "Human");
-            var @class = Class.Create(7, "Paladin");
+            var species = Species.Create(8, "Human", []);
+            var @class = Class.Create(7, "Paladin", []);
 
             // Act
-            var character = Character.Create("Andor", species, @class, 1, 10, 15);
+            var character = Character.Create(Guid.NewGuid(), "Andor", species, @class, 1, 10, 15, []);
 
             // Assert
-            Assert.NotEqual(Guid.Empty, character.Id);
-            Assert.Equal("Andor", character.Name);
+            Assert.NotEqual(Guid.Empty, character.Id.Value);
+            Assert.Equal("Andor", character.Name.Value);
             Assert.Equal(SpeciesIds.Human, character.Species.Id);
             Assert.Equal(ClassIds.Paladin, character.Class.Id);
             Assert.Equal(1, character.Level);
@@ -30,18 +31,18 @@ namespace QuestForge.Tests.Application.CharacterTests
         public void Update_should_update_character_informations()
         {
             // Arrange
-            var species = Species.Create(4, "Elf");
-            var @class = Class.Create(10, "Sorcerer");
-            var character = Character.Create("Sarophin", species, @class, 1, 8, 14);
+            var species = Species.Create(4, "Elf", []);
+            var @class = Class.Create(10, "Sorcerer", []);
+            var character = Character.Create(Guid.NewGuid(), "Sarophin", species, @class, 1, 8, 14, []);
 
             // Act
-            var newSpecies = Species.Create(5, "Gnome");
-            var newClass = Class.Create(11, "Warlock");
+            var newSpecies = Species.Create(5, "Gnome", []);
+            var newClass = Class.Create(11, "Warlock", []);
 
-            character.Update("Sar", newSpecies, newClass, 2, 13, 15);
+            character.Update("Sar", newSpecies.Id, newClass.Id, 2, 13, 15);
 
             // Assert
-            Assert.Equal("Sar", character.Name);
+            Assert.Equal("Sar", character.Name.Value);
             Assert.Equal(SpeciesIds.Gnome, character.Species.Id);
             Assert.Equal(ClassIds.Warlock, character.Class.Id);
             Assert.Equal(2, character.Level);

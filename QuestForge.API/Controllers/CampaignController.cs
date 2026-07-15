@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using QuestForge.Application.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using QuestForge.Application.UsesCases.Commands.Campaigns.CreateCampaign;
+using QuestForge.Application.UsesCases.Commands.Campaigns.DeleteCampaign;
+using QuestForge.Application.UsesCases.Commands.Campaigns.UpdateCampaign;
+using QuestForge.Application.UsesCases.Queries.Campaigns.GetAllCampaigns;
+using QuestForge.Application.UsesCases.Queries.Campaigns.GetCampaignById;
 using QuestForge.DTOs.DTOsCampaign;
 
 namespace QuestForge.API.Controllers
@@ -8,49 +13,59 @@ namespace QuestForge.API.Controllers
     [Route("api/[controller]")]
     public class CampaignController : ControllerBase
     {
-        private readonly ICampaignService _service;
+        private readonly IMediator _mediator;
 
-        public CampaignController(ICampaignService service)
+        public CampaignController(IMediator mediator)
         {
-            _service = service;
+            _mediator = mediator;
         }
 
         [HttpGet("GetCampaign{id}")]
-        public async Task<IActionResult> GetCampaignById(Guid id)
+        public async Task<IActionResult> GetCampaignById(Guid id, CancellationToken cancellationToken)
         {
-            var campaignDto = await _service.GetByIdAsync(id);
+            var request = new GetCampaignByIdQuery(id);
 
-            return campaignDto is null ? NotFound() : Ok(campaignDto);
+            var campaignDto = await _mediator.Send(request, cancellationToken);
+
+            return Ok(campaignDto);
         }
 
         [HttpGet("GetAllCampaigns")]
         public async Task<IActionResult> GetAllCampaigns()
         {
-            var campaignsDtos = await _service.GetAllAsync();
+            var request = new GetAllCampaignsQuery();
 
-            return campaignsDtos is null ? NotFound() : Ok(campaignsDtos);
+            var campaignsDtos = await _mediator.Send(request);
+
+            return Ok(campaignsDtos);
         }
 
         [HttpPost("CreateCampaign")]
-        public async Task<IActionResult> CreateCampaign([FromBody] CreateCampaignDto dto)
+        public async Task<IActionResult> CreateCampaign([FromBody] CreateCampaignDto dto, CancellationToken cancellationToken)
         {
-            var campaignDto = await _service.CreateAsync(dto);
+            var request = new CreateCampaignCommand(dto.Name, dto.Description ?? string.Empty);
 
-            return CreatedAtAction(nameof(GetCampaignById), new { id = campaignDto.Id }, campaignDto);
+            var id = await _mediator.Send(request, cancellationToken);
+
+            return CreatedAtAction(nameof(CreateCampaign), new { id }, new {Id = id});
         }
 
         [HttpPut("UpdateCampaign")]
-        public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] CreateCampaignDto dto)
+        public async Task<IActionResult> UpdateCampaign(Guid id, [FromBody] CreateCampaignDto dto, CancellationToken cancellationToken)
         {
-            var updatedCampaign = await _service.UpdateAsync(id, dto);
+            var request = new UpdateCampaignCommand(id, dto.Name, dto.Description ?? string.Empty);
 
-            return updatedCampaign is null ? NotFound() : Ok(updatedCampaign);
+            var campaignDto = await _mediator.Send(request, cancellationToken);
+
+            return Ok(campaignDto);
         }
 
         [HttpDelete("DeleteCampaign{id}")]
-        public async Task<IActionResult> DeleteCampaign(Guid id)
+        public async Task<IActionResult> DeleteCampaign(Guid id, CancellationToken cancellationToken)
         {
-            var success = await _service.DeleteAsync(id);
+            var request = new DeleteCampaignCommand(id);
+
+            var success = await _mediator.Send(request, cancellationToken);
 
             return success ? NoContent() : NotFound();
         }
